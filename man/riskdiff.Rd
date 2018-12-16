@@ -8,5 +8,5 @@ riskdiff(x, y = NULL, weight = NULL, conf.level = 0.95,
   rev = c("neither", "rows", "columns", "both"), dnn = NULL)
 }
 \description{
-Calculate risk difference and 95% confidence interval using Wald method
+Calculate risk difference and 95 percent confidence interval using Wald method
 }
