@@ -1,4 +1,8 @@
 
+#' Risk difference
+#'
+#' Calculate risk difference and 95% confidence interval using Wald method
+
 riskdiff <- function(x, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"),
                      dnn = NULL) {
