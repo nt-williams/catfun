@@ -1,0 +1,14 @@
+Package: catfun
+Type: Package
+Title: Functions for P8120
+Version: 0.1.0
+Author: Nick Williams
+Maintainer: Nick Williams <ntw2117@cumc.columbia.edu>
+Description: R functions for course P8120 at Columbia University.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    epitools, 
+    tidyverse
+RoxygenNote: 6.1.1
