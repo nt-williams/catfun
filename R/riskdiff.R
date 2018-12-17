@@ -21,8 +21,7 @@ riskdiff <- function(df, x, y = NULL, weight = NULL, conf.level = 0.95,
       else dnn <- c(noquote(x), noquote(y))
       else if (is.null(y))
         dnn <- names(dimnames(x))
-      else dnn <- dnn
-  }
+  } else dnn <- dnn
 
   if (missing(df)) {
     if (is.matrix(x)) {
