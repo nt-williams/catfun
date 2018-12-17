@@ -4,7 +4,7 @@
 \alias{riskdiff}
 \title{Risk difference}
 \usage{
-riskdiff(x, y = NULL, weight = NULL, conf.level = 0.95,
+riskdiff(df, x, y = NULL, weight = NULL, conf.level = 0.95,
   rev = c("neither", "rows", "columns", "both"), dnn = NULL)
 }
 \description{
