@@ -61,10 +61,16 @@ riskdiff <- function(df, x, y = NULL, weight = NULL, conf.level = 0.95,
   else if (rd > 0)
     ci <- rd + c(1, -1) * z * se
 
+  cat("\n")
   cat("Risk difference:", rd, "\n")
   cat(paste(conf.level * 100, "%", sep = ""), "confidence interval:", round(ci, 4), "\n")
   cat("\n")
+  cat("Proportion 1 =", round(p1, 4), "\n")
+  cat("Proportion 2 =", round(p2, 4), "\n")
+  cat(paste(rep("-", 45), collapse = ""), "\n")
+  cat("\n")
   cat("Contingency table: \n")
+  cat("\n")
   x
 
 }
