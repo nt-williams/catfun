@@ -32,17 +32,21 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
       names(statistic) <- "Chi-squared"
       names(p) <- "proportion"
 
-      # if (alternative == "two.sided") {
-      #
-      # } else if (alternative == "less") {
-      #
-      # } else if (alternative == "greater") {
-      #
-      # }
+      if (alternative == "two.sided") {
+        if (statistic < 0) {
+          p.value <- pnorm(statistic) * 2
+        } else {
+          p.value <- pnorm(statistic, lower.tail = FALSE) * 2
+        }
+      } else if (alternative == "less") {
+        p.value <- pnorm(statistic)
+      } else if (alternative == "greater") {
+        p.value <- pnorm(statistic, lower.tail = FALSE)
+      }
     }
     vals <- list(null.value = p, alternative = alternative, method = method,
                  estimate = p_mle, data.name = "Test", statistic = statistic,
-                 parameter = parameter, p.value = 0.5, conf.int = ci)
+                 parameter = parameter, p.value = p.value, conf.int = ci)
     class(vals) <- "htest"
     print(vals)
 
