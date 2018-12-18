@@ -17,19 +17,21 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
       p_mle <- x / n
       names(p_mle) <- "MLE proportion"
 
-      se <- sqrt(p_mle * (1 - p_mle) / n)
+      se_ci <- sqrt(p_mle * (1 - p_mle) / n)
       z_cv <- qnorm(0.5 * (1 + conf.level))
-      ci <- round(p_mle + c(-1, 1) * z_cv * se, 4)
+      ci <- round(p_mle + c(-1, 1) * z_cv * se_ci, 4)
       attr(ci, "conf.level") <- conf.level
 
       if (!is.null(p)) {
+        se <- sqrt(p * (1 - p) / n)
         statistic <- (p_mle - p) / se
       } else {
         p <- 0.5
+        se <- sqrt(p * (1 - p) / n)
         statistic <- (p_mle - p) / se
 
       }
-      names(statistic) <- "Chi-squared"
+      names(statistic) <- "Z"
       names(p) <- "proportion"
 
       if (alternative == "two.sided") {
@@ -46,7 +48,7 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
     }
     vals <- list(null.value = p, alternative = alternative, method = method,
                  estimate = p_mle, data.name = "Test", statistic = statistic,
-                 parameter = parameter, p.value = p.value, conf.int = ci)
+                 p.value = p.value, conf.int = ci)
     class(vals) <- "htest"
     print(vals)
 
