@@ -15,3 +15,4 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
               conf.level = conf.level, correct = correct)
   }
 }
+

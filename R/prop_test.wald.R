@@ -6,7 +6,7 @@ prop_test.wald <- function(x, n, p = NULL,
   alternative <- match.arg(alternative)
 
   method <- "1 sample test of proportions without continuity correction"
-  d_name <- paste(deparse(substitute(x)), "out of", deparse(substitute(n)))
+  d_name <- paste(x, "out of", n)
 
   p_mle <- x / n
   names(p_mle) <- "Proportion"
