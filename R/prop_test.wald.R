@@ -16,6 +16,13 @@ prop_test.wald <- function(x, n, p = NULL,
   ci <- p_mle + c(-1, 1) * z_cv * se_ci
   attr(ci, "conf.level") <- conf.level
 
+  if (ci[1] < 0) {
+    ci[1] <- 0
+  }
+  if (ci[2] > 1) {
+    ci[2] <- 1
+  }
+
   if (!is.null(p)) {
     se <- sqrt(p * (1 - p) / n)
     statistic <- (p_mle - p) / se

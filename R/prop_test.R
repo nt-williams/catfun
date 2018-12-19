@@ -1,4 +1,9 @@
 
+#' Tests for equality of proportions
+#'
+#' Run tests for equality of proportions using Wald normal approximation, Wilson approximation, or using an exact test.
+
+
 prop_test <- function(x, n, p = NULL, method = c("wald", "wilson"),
                       alternative = c("two.sided", "less", "greater"),
                       conf.level = 0.95, correct = FALSE) {
