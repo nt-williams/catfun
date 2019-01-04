@@ -10,5 +10,6 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     epitools, 
-    tidyverse
+    tidyverse, 
+    DescTools
 RoxygenNote: 6.1.1

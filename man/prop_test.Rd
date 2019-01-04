@@ -4,10 +4,12 @@
 \alias{prop_test}
 \title{Tests for equality of proportions}
 \usage{
-prop_test(x, n, p = NULL, method = c("wald", "wilson"),
+prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
+  "jeffreys", "modified wilson", "wilsoncc", "modified jeffreys",
+  "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
   alternative = c("two.sided", "less", "greater"), conf.level = 0.95,
-  correct = FALSE)
+  correct = FALSE, exact = FALSE)
 }
 \description{
-Run tests for equality of proportions using Wald normal approximation, Wilson approximation, or using an exact test.
+Run tests for equality of proportions
 }
