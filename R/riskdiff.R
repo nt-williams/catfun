@@ -51,15 +51,15 @@ riskdiff <- function(df, x, y = NULL, weight = NULL, conf.level = 0.95,
   names(dimnames(x)) <- dnn
 
   # rd and conf interval
-  p1 <- x[1,1] / sum(x[, 1])
-  p2 <- x[1, 2] / sum(x[, 2])
+  p1 <- x[1, 1] / sum(x[1, ])
+  p2 <- x[2, 1] / sum(x[2, ])
   rd <- round(p1 - p2, 4)
   z <- qnorm(0.5 * (1 + conf.level))
-  se <- sqrt((p1*(1 - p1)/sum(x[, 1])) + (p2*(1 - p2)/sum(x[, 2])))
+  se <- sqrt((p1*(1 - p1)/sum(x[1, ])) + (p2*(1 - p2)/sum(x[2, ])))
   if (rd < 0)
-    ci <- rd + c(-1, 1) * z * se
-  else if (rd > 0)
     ci <- rd + c(1, -1) * z * se
+  else if (rd > 0)
+    ci <- rd + c(-1, 1) * z * se
 
   out <- list(rd = rd, conf.level = conf.level, ci = ci,
               p1 = p1, p2 = p2, tab = x)

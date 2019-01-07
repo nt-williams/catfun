@@ -1,7 +1,6 @@
 
 print.prop_test <- function(z, ...) {
-  cat("\n")
-  cat(z$x, "out of", paste0(z$n, ","), "null probability =", z$p)
+  cat(z$x, " out of ", paste0(z$n, ","), " null probability = ", z$p)
   cat("\n")
   cat(paste(rep("-", 40), collapse = ""), "\n")
   cat("Observed proportion:", z$estimate, "\n")
