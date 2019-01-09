@@ -1,7 +1,6 @@
 
 #' @export
 
-
 print.rdiff <- function(x, ...) {
   cat("\n")
   cat("Risk difference:", x$rd, "\n")

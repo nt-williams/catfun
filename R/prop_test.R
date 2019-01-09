@@ -3,6 +3,7 @@
 #'
 #' Run tests for equality of proportions
 #'
+#' @importFrom magrittr %>%
 #' @export
 
 

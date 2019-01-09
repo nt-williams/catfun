@@ -19,13 +19,11 @@
 #'   treatment = c(rep(c("estrogen", "placebo"), 2)),
 #'   count = c(751, 623, 7755, 7479))
 #'
-#' xtabs(count ~ treatment + disease, data = count) %>%
-#'   riskdiff()
+#' riskdiff(trial, "treatment", "disease", weight = "count")
 #'
-#' trial %>% riskdiff("treatment", "disease", weight = "count")
-#'
+#' @importFrom magrittr %>%
 #' @export
-#'
+
 
 riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"),
