@@ -22,6 +22,8 @@
 #' riskdiff(trial, "treatment", "disease", weight = "count")
 #'
 #' @importFrom magrittr %>%
+#' @importFrom epitools epitable
+#' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
 
 

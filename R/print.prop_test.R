@@ -1,7 +1,5 @@
 
-#' @importFrom cli cat_bullet
-#' @importFrom cli cat_rule
-#' @importFrom cli cat_line
+#' @importFrom cli cat_bullet cat_rule cat_line
 #' @export
 
 print.prop_test <- function(z, ...) {

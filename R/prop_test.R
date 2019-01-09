@@ -4,6 +4,7 @@
 #' Run tests for equality of proportions
 #'
 #' @importFrom magrittr %>%
+#' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
 
 

@@ -9,7 +9,8 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    epitools, 
-    tidyverse, 
-    DescTools
+    epitools,  
+    DescTools, 
+    cli, 
+    magrittr
 RoxygenNote: 6.1.1
