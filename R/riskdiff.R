@@ -2,9 +2,32 @@
 #' Risk difference
 #'
 #' Calculate risk difference and 95 percent confidence interval using Wald method
+#'
+#' @param df a one-dimensional dataframe containing counts or a 2x2 matrix of counts. If a matrix, x and y must be NULL
+#' @param x a vector of counts or a 2x2 matrix of counts. If a matrix, df and y must be NULL
+#' @param y an optional vector of counts
+#' @param weight an optional vector of count weights
+#' @param conf.level confidence level for confidence interval, default is 0.95
+#' @param rev reverse order cells. Options are "row", "columns", "both", and "neither" (default)
+#' @param dnn optional character vector of dimension names
+#'
+#' @return an S3 object
+#'
+#' @examples
+#' trial <- data.frame(
+#'   disease = c(rep("yes", 2), rep("no", 2)),
+#'   treatment = c(rep(c("estrogen", "placebo"), 2)),
+#'   count = c(751, 623, 7755, 7479))
+#'
+#' xtabs(count ~ treatment + disease, data = count) %>%
+#'   riskdiff()
+#'
+#' trial %>% riskdiff("treatment", "disease", weight = "count")
+#'
+#' @export
+#'
 
-
-riskdiff <- function(df, x, y = NULL, weight = NULL, conf.level = 0.95,
+riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"),
                      dnn = NULL) {
 
@@ -22,6 +45,16 @@ riskdiff <- function(df, x, y = NULL, weight = NULL, conf.level = 0.95,
       else if (is.null(y))
         dnn <- names(dimnames(x))
   } else dnn <- dnn
+
+  if (is.matrix(df)) {
+    if (!is.null(x)) {
+      stop("If df is a matrix, x should be NULL")
+    } else if (!is.null(y)) {
+      stop("If df is a matrix, y should be NULL")
+    } else {
+      x <- epitable(df, rev = rev)
+    }
+  }
 
   if (missing(df)) {
     if (is.matrix(x)) {

@@ -4,9 +4,39 @@
 \alias{riskdiff}
 \title{Risk difference}
 \usage{
-riskdiff(df, x, y = NULL, weight = NULL, conf.level = 0.95,
+riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   rev = c("neither", "rows", "columns", "both"), dnn = NULL)
+}
+\arguments{
+\item{df}{a one-dimensional dataframe containing counts or a 2x2 matrix of counts. If a matrix, x and y must be NULL}
+
+\item{x}{a vector of counts or a 2x2 matrix of counts. If a matrix, df and y must be NULL}
+
+\item{y}{an optional vector of counts}
+
+\item{weight}{an optional vector of count weights}
+
+\item{conf.level}{confidence level for confidence interval, default is 0.95}
+
+\item{rev}{reverse order cells. Options are "row", "columns", "both", and "neither" (default)}
+
+\item{dnn}{optional character vector of dimension names}
+}
+\value{
+an S3 object
 }
 \description{
 Calculate risk difference and 95 percent confidence interval using Wald method
+}
+\examples{
+trial <- data.frame(
+  disease = c(rep("yes", 2), rep("no", 2)),
+  treatment = c(rep(c("estrogen", "placebo"), 2)),
+  count = c(751, 623, 7755, 7479))
+
+xtabs(count ~ treatment + disease, data = count) \%>\%
+  riskdiff()
+
+trial \%>\% riskdiff("treatment", "disease", weight = "count")
+
 }
