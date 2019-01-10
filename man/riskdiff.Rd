@@ -8,7 +8,8 @@ riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   rev = c("neither", "rows", "columns", "both"), dnn = NULL)
 }
 \arguments{
-\item{df}{a one-dimensional dataframe containing counts or a 2x2 matrix of counts. If a matrix, x and y must be NULL}
+\item{df}{a one-dimensional dataframe containing counts or a two-dimensional dataframe/matrix of counts.
+If a matrix, x and y must be NULL}
 
 \item{x}{a vector of counts or a 2x2 matrix of counts. If a matrix, df and y must be NULL}
 

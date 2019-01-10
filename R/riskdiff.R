@@ -3,7 +3,8 @@
 #'
 #' Calculate risk difference and 95 percent confidence interval using Wald method
 #'
-#' @param df a one-dimensional dataframe containing counts or a 2x2 matrix of counts. If a matrix, x and y must be NULL
+#' @param df a one-dimensional dataframe containing counts or a two-dimensional dataframe/matrix of counts.
+#'      If a matrix, x and y must be NULL
 #' @param x a vector of counts or a 2x2 matrix of counts. If a matrix, df and y must be NULL
 #' @param y an optional vector of counts
 #' @param weight an optional vector of count weights
@@ -31,9 +32,17 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"),
                      dnn = NULL) {
 
+  arguments <- as.list(match.call())
+
   # error checks
   if (is.matrix(x) && !is.null(y)) {
     stop("If x is a matrix, y should be NULL")
+  } else if (is.matrix(x) && is.null(y)) {
+    if (ncol(x) != 2) {
+      stop("If using a matrix, dimensions must be 2x2")
+    } else if (nrow(x) != 2) {
+      stop("If using a matrix, dimensions must be 2x2")
+    }
   }
 
   # extracting dimension names
@@ -47,6 +56,12 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   } else dnn <- dnn
 
   if (is.matrix(df)) {
+    if (ncol(df) != 2) {
+      stop("If using a matrix, dimensions must be 2x2")
+    } else if (nrow(df) != 2) {
+      stop("If using a matrix, dimensions must be 2x2")
+    }
+
     if (!is.null(x)) {
       stop("If df is a matrix, x should be NULL")
     } else if (!is.null(y)) {
@@ -60,6 +75,7 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
     if (is.matrix(x)) {
       x <- epitable(x, rev = rev)
     }
+
     if (!is.null(y) && is.null(weight)) {
       # x <- xtabs(~ x + y) %>%
       #   epitable(rev = rev)
@@ -73,9 +89,12 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
     if (!is.null(y) && is.null(weight)) {
       # x <- xtabs(~ df[[x]] + df[[y]]) %>%
       #   epitable(rev)
+
       x <- table(df[[x]], df[[y]]) %>%
         epitable(rev = rev)
+
     } else if (!is.null(y) && !is.null(weight)) {
+
       x <- xtabs(df[[weight]] ~ df[[x]] + df[[y]]) %>%
         epitable(rev = rev)
     }
