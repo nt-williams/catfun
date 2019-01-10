@@ -10,6 +10,24 @@ prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
   alternative = c("two.sided", "less", "greater"), conf.level = 0.95,
   correct = FALSE, exact = FALSE)
 }
+\arguments{
+\item{x}{a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns.}
+
+\item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
+
+\item{p}{a vector of probabilities, length must be same as the number of groups specified by x.}
+
+\item{method}{a character string indicating method for calculating confidence interval, default is "wald".}
+
+\item{alternative}{character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+"greater", or "less".}
+
+\item{conf.level}{confidence level for confidence interval, default is 0.95.}
+
+\item{correct}{a logical indicating whether Yate's continuity correction should be applied.}
+
+\item{exact}{a logical indicating whether to output exact p-value, ignored if k-sample test.}
+}
 \description{
 Run tests for equality of proportions
 }

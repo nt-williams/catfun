@@ -3,6 +3,16 @@
 #'
 #' Run tests for equality of proportions
 #'
+#' @param x a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns.
+#' @param n a vector of counts of trials, ignored if x is a matrix or table.
+#' @param p a vector of probabilities, length must be same as the number of groups specified by x.
+#' @param method a character string indicating method for calculating confidence interval, default is "wald".
+#' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+#'      "greater", or "less".
+#' @param conf.level confidence level for confidence interval, default is 0.95.
+#' @param correct a logical indicating whether Yate's continuity correction should be applied.
+#' @param exact a logical indicating whether to output exact p-value, ignored if k-sample test.
+#'
 #' @importFrom magrittr %>%
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
