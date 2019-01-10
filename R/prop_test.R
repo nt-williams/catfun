@@ -27,6 +27,11 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-coul
   method <- match.arg(method)
   alternative <- match.arg(alternative)
 
+  if (is.matrix(x)) {
+    n <- rowSums(x)
+    x <- x[, 1L]
+  }
+
   if (length(x) == 1) {
     if (!is.null(p)) {
       p <- p
