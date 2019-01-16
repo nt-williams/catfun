@@ -31,3 +31,17 @@ prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
 \description{
 Run tests for equality of proportions
 }
+\examples{
+prop_test(7, 50, method = "wald", p = 0.2)
+prop_test(7, 50, method = "wald", p = 0.2, exact = TRUE)
+
+vietnam <- data.frame(
+   service = c(rep("yes", 2), rep("no", 2)),
+   sleep = c(rep(c("yes", "no"), 2)),
+   count = c(173, 160, 599, 851)
+)
+
+sleep <- xtabs(count ~ service + sleep, data = vietnam)
+prop_test(sleep)
+
+}

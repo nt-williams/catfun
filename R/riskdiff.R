@@ -32,8 +32,6 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"),
                      dnn = NULL) {
 
-  arguments <- as.list(match.call())
-
   # error checks
   if (is.matrix(x) && !is.null(y)) {
     stop("If x is a matrix, y should be NULL")
