@@ -3,10 +3,10 @@
 #' @export
 
 print.prop_test <- function(x, ...) {
-  if (length(x$x) == 1) {
+  if (length(x$x) == 1L) {
     cat(x$x, " out of ", paste0(x$n, ","), " null probability = ", x$p)
     cat("\n")
-    cat(paste(rep("-", 40), collapse = ""), "\n")
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
     cat("Observed proportion:", x$estimate, "\n")
     cat("Confidence interval method:", x$method, "\n")
     cat("Confidence interval:", x$method_ci, "\n")
@@ -14,7 +14,7 @@ print.prop_test <- function(x, ...) {
     cat("Exact limits:", x$exact_ci, "\n")
     cat("\n")
     cat("Test that", x$estimate, "=", x$p, "\n")
-    cat(paste(rep("-", 40), collapse = ""), "\n")
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
     cat("Chi-squared:", x$statistic, "\n")
     cat("Degrees freedom:", x$df, "\n")
     cat("p-value:", x$p_value, "\n")

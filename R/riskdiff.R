@@ -38,9 +38,9 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   if (is.matrix(x) && !is.null(y)) {
     stop("If x is a matrix, y should be NULL")
   } else if (is.matrix(x) && is.null(y)) {
-    if (ncol(x) != 2) {
+    if (ncol(x) != 2L) {
       stop("If using a matrix, dimensions must be 2x2")
-    } else if (nrow(x) != 2) {
+    } else if (nrow(x) != 2L) {
       stop("If using a matrix, dimensions must be 2x2")
     }
   }
@@ -56,9 +56,9 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   } else dnn <- dnn
 
   if (is.matrix(df)) {
-    if (ncol(df) != 2) {
+    if (ncol(df) != 2L) {
       stop("If using a matrix, dimensions must be 2x2")
-    } else if (nrow(df) != 2) {
+    } else if (nrow(df) != 2L) {
       stop("If using a matrix, dimensions must be 2x2")
     }
 
@@ -103,15 +103,15 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   names(dimnames(x)) <- dnn
 
   # rd and conf interval
-  p1 <- x[1, 1] / sum(x[1, ])
-  p2 <- x[2, 1] / sum(x[2, ])
-  rd <- round(p1 - p2, 4)
-  z <- qnorm(0.5 * (1 + conf.level))
-  se <- sqrt((p1*(1 - p1)/sum(x[1, ])) + (p2*(1 - p2)/sum(x[2, ])))
-  if (rd < 0)
-    ci <- rd + c(1, -1) * z * se
+  p1 <- x[1L, 1L] / sum(x[1L, ])
+  p2 <- x[2L, 1L] / sum(x[2L, ])
+  rd <- round(p1 - p2, 4L)
+  z <- qnorm(0.5 * (1L + conf.level))
+  se <- sqrt((p1*(1L - p1)/sum(x[1L, ])) + (p2*(1L - p2)/sum(x[2L, ])))
+  if (rd < 0L)
+    ci <- rd + c(1L, -1L) * z * se
   else if (rd > 0)
-    ci <- rd + c(-1, 1) * z * se
+    ci <- rd + c(-1L, 1L) * z * se
 
   out <- list(rd = rd, conf.level = conf.level, ci = ci,
               p1 = p1, p2 = p2, tab = x)
