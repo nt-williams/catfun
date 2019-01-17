@@ -24,7 +24,14 @@ If a matrix, x and y must be NULL}
 \item{dnn}{optional character vector of dimension names}
 }
 \value{
-an S3 object
+a list with class "rdiff" containing the following components:
+
+\item{rd}{risk difference}
+\item{conf.level}{specified confidence level}
+\item{ci}{calculated confidence interval}
+\item{p1}{proportion one}
+\item{p2}{proportion two}
+\item{tab}{2x2 table using for calculating risk difference}
 }
 \description{
 Calculate risk difference and 95 percent confidence interval using Wald method

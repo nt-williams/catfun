@@ -12,7 +12,14 @@
 #' @param rev reverse order cells. Options are "row", "columns", "both", and "neither" (default)
 #' @param dnn optional character vector of dimension names
 #'
-#' @return an S3 object
+#' @return a list with class "rdiff" containing the following components:
+#'
+#' \item{rd}{risk difference}
+#' \item{conf.level}{specified confidence level}
+#' \item{ci}{calculated confidence interval}
+#' \item{p1}{proportion one}
+#' \item{p2}{proportion two}
+#' \item{tab}{2x2 table using for calculating risk difference}
 #'
 #' @examples
 #' trial <- data.frame(

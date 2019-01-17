@@ -26,6 +26,19 @@
 #' sleep <- xtabs(count ~ service + sleep, data = vietnam)
 #' prop_test(sleep)
 #'
+#' @return a list with class "prop_test" containing the following components:
+#'
+#' \item{x}{number of successes}
+#' \item{n}{number of trials}
+#' \item{p}{null proportion}
+#' \item{statistic}{the value of Pearson's chi-squared test statistic}
+#' \item{p_value}{p-value corresponding to chi-squared test statistic}
+#' \item{df}{degrees of freedom}
+#' \item{method}{the method used to calculate the confidence interval}
+#' \item{method_ci}{confidence interval calculated using specified method}
+#' \item{exact_ci}{exact confidence interval}
+#' \item{exact_p}{p-value from exact test}
+#'
 #' @importFrom magrittr %>%
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
