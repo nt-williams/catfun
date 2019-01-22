@@ -1,3 +1,5 @@
+
+
 prop_power <- function(n, n1, n2, p1, p2,
                        fraction = 0.5, alpha = 0.05, power = NULL,
                        alternative = c("two.sided", "one.sided"), strict = FALSE,
