@@ -30,34 +30,43 @@ prop_power <- function(n, n1, n2, p1, p2,
       base <- power.prop.test(n = NULL, p1 = p1, p2 = p2, sig.level = alpha, power = power,
                               alternative = alternative, strict = strict, tol = tol)
     }
-  }
+  } else {
 
+    if (missing(power)) {
 
+      hm <- Hmisc::bpower(p1 = p1, p2 = p2, n = n, n1 = n1, n2 = n2, alpha = alpha,
+                   odds.ratio = odds.ratio, percent.reduction = percent.reduction)
 
+      base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = power,
+                              alternative = alternative, strict = strict, tol = tol)
+    } else {
+      if (!missing(n) | !missing(n1) | !missing(n2)) {
+        stop("If given power, n, n1, and n2 must be left blank")
+      } else {
+        hm <- Hmisc::bsamsize(p1 = p1, p2 = p2, fraction = fraction, alpha = alpha, power = power)
 
+        base <- power.prop.test(n = NULL, p1 = p1, p2 = p2, sig.level = alpha, power = power,
+                                alternative = alternative, strict = strict, tol = tol)
+      }
 
-
-
-  else {
-
-    if (is.null(power)) {
-
-      hm_power <- bpower(p1 = p1, p2 = p2, n = n, alpha = alpha, odds.ratio = odds.ratio,
-                         percent.reduction = percent.reduction)
     }
-
-    base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = power,
-                            alternative = alternative, strict = strict, tol = tol)
-
-    non_base <- Hmisc::bsamsize(p1 = p1, p2 = p2, fraction = fraction, alpha = alpha, power = power)
   }
 
   print(base)
-
+  if (exists("hm")) {
+    print(hm)
+  }
 }
 
 prop_power(n = 220, p1 = 0.35, p2 = 0.2)
 prop_power(n1 = 110, n2 = 110, p1 = 0.35, p2 = 0.2)
+prop_power(p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
+prop_power(n = 220, p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
+
+bsamsize(p1 = 0.35, p2 = 0.2,
+         fraction = 2/3,
+         alpha = 0.05,
+         power = 0.85)
 
 power.prop.test(n = 110,
                 p1 = 0.35, p2 = 0.2,
