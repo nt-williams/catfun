@@ -47,19 +47,19 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
       if (!missing(p2)) {
         stop("Either manually enter p2 or use odds ratio, not both")
       } else {
-        p2 <- p1 * odds.ratio/(1 - p1 + p1 * odds.ratio)
+        p2 <- p1 * odds.ratio/(1L - p1 + p1 * odds.ratio)
       }
-      p2 <- p1 * odds.ratio/(1 - p1 + p1 * odds.ratio)
+      p2 <- p1 * odds.ratio/(1L - p1 + p1 * odds.ratio)
     } else if (!missing(percent.reduction)) {
       if (!missing(p2)) {
         stop("Either manually enter p2 or use percent reduction, not both")
       } else {
-        p2 <- p1 * (1 - percent.reduction/100)
+        p2 <- p1 * (1L - percent.reduction/100L)
       }
     }
 
     if (missing(power)) {
-      base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = NULL,
+      base <- power.prop.test(n = (n/2L), p1 = p1, p2 = p2, sig.level = alpha, power = NULL,
                               alternative = alternative)
 
     } else if (missing(n)) {
@@ -67,7 +67,7 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
                               alternative = alternative)
     }
 
-    n <- (base$n)*2
+    n <- (base$n)*2L
     n1 <- base$n
     n2 <- base$n
     p1 <- base$p1
@@ -82,10 +82,10 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
       hm <- Hmisc::bpower(p1 = p1, p2 = p2, n = n, n1 = n1, n2 = n2, alpha = alpha,
                    odds.ratio = odds.ratio, percent.reduction = percent.reduction)
 
-      base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = power,
+      base <- power.prop.test(n = (n/2L), p1 = p1, p2 = p2, sig.level = alpha, power = power,
                               alternative = alternative)
 
-      n <- (base$n)*2
+      n <- (base$n)*2L
       n1 <- n1
       n2 <- n2
       p1 <- base$p1
@@ -103,9 +103,9 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
         base <- power.prop.test(n = NULL, p1 = p1, p2 = p2, sig.level = alpha, power = power,
                                 alternative = alternative)
 
-        n <- sum(hm[1], hm[2])
-        n1 <- hm[1]
-        n2 <- hm[2]
+        n <- sum(hm[1L], hm[2L])
+        n1 <- hm[1L]
+        n2 <- hm[2L]
         p1 <- base$p1
         p2 <- base$p2
         power <- base$power
