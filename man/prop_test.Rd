@@ -43,7 +43,7 @@ a list with class "prop_test" containing the following components:
 \item{exact_p}{p-value from exact test}
 }
 \description{
-Run tests for equality of proportions
+Run tests for equality of proportions.
 }
 \examples{
 prop_test(7, 50, method = "wald", p = 0.2)

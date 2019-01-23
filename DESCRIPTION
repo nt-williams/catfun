@@ -12,7 +12,8 @@ Imports:
     epitools,  
     DescTools, 
     cli, 
-    magrittr
+    magrittr, 
+    Hmisc
 RoxygenNote: 6.1.1
 Suggests: 
     testthat, 

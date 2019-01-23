@@ -1,7 +1,7 @@
 
 #' Tests for equality of proportions
 #'
-#' Run tests for equality of proportions
+#' Run tests for equality of proportions.
 #'
 #' @param x a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns.
 #' @param n a vector of counts of trials, ignored if x is a matrix or table.

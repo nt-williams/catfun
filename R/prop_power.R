@@ -1,4 +1,11 @@
 
+#' Power and sample size for 2 proportions
+#'
+#' Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
+#'
+#' @importFrom Hmisc bsamsize bpower
+#' @importFrom stats power.prop.test
+#' @export
 
 prop_power <- function(n, n1, n2, p1, p2,
                        fraction = 0.5, alpha = 0.05, power = NULL,
@@ -34,7 +41,14 @@ prop_power <- function(n, n1, n2, p1, p2,
                               alternative = alternative, strict = strict, tol = tol)
     }
 
-    print(base)
+    n <- (base$n)*2
+    n1 <- base$n
+    n2 <- base$n
+    p1 <- base$p1
+    p2 <- base$p2
+    power <- base$power
+    sig.level <- base$sig.level
+
   } else {
 
     if (missing(power)) {
@@ -72,32 +86,13 @@ prop_power <- function(n, n1, n2, p1, p2,
         sig.level <- base$sig.level
 
       }
-
     }
-    out <- list(n = n, n1 = n1, n2 = n2, power = power, p1 = p1, p2 = p2, sig.level = sig.level)
-    class(out) <- "prop_power"
-    print(out)
   }
+
+  out <- list(n = n, n1 = n1, n2 = n2, power = power, p1 = p1, p2 = p2, sig.level = sig.level)
+  class(out) <- "prop_power"
+  print(out)
+
 }
 
-prop_power(n = 220, p1 = 0.35, p2 = 0.2)
-prop_power(n1 = 110, n2 = 110, p1 = 0.35, p2 = 0.2)
-prop_power(p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
-prop_power(n = 220, p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
 
-test1 <- bsamsize(p1 = 0.35, p2 = 0.2,
-         fraction = 2/3,
-         alpha = 0.05,
-         power = 0.85)
-
-test2 <- power.prop.test(n = 110,
-                p1 = 0.35, p2 = 0.2,
-                sig.level = 0.05)
-
-test3 <- bpower(0.35, 0.2, n = 220)
-
-test4 <- power.prop.test(p1 = 0.35, p2 = 0.2,
-                         power = 0.80,
-                         sig.level = 0.05)
-bpower(p1 = 0.35, n = 220, percent.reduction = 42.857)
-bpower(p1 = 0.2, n = 220, odds.ratio = 2.153846)

@@ -34,7 +34,7 @@ a list with class "rdiff" containing the following components:
 \item{tab}{2x2 table using for calculating risk difference}
 }
 \description{
-Calculate risk difference and 95 percent confidence interval using Wald method
+Calculate risk difference and 95 percent confidence interval using Wald method.
 }
 \examples{
 trial <- data.frame(

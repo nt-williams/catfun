@@ -1,5 +1,6 @@
 
 #' @importFrom cli cat_bullet cat_rule cat_line
+#' @export
 
 print.prop_power <- function(x, ...) {
   cat_line()

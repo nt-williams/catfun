@@ -1,7 +1,7 @@
 
 #' Risk difference
 #'
-#' Calculate risk difference and 95 percent confidence interval using Wald method
+#' Calculate risk difference and 95 percent confidence interval using Wald method.
 #'
 #' @param df a one-dimensional dataframe containing counts or a two-dimensional dataframe/matrix of counts.
 #'      If a matrix, x and y must be NULL
