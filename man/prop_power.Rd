@@ -31,6 +31,24 @@ prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
 
 \item{percent.reduction}{percent reduction of p1 to p2}
 }
+\value{
+a list with class "prop_power" containing the following components:
+
+\item{n}{the total sample size}
+\item{n1}{the sample size in group 1}
+\item{n2}{the sample size in group 2}
+\item{p1}{the proportion in group 1}
+\item{p2}{the proportion in group 2}
+\item{power}{calculated or desired power}
+\item{sig.level}{level of signficance}
+}
 \description{
 Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
+}
+\examples{
+prop_power(n = 220, p1 = 0.35, p2 = 0.2)
+prop_power(p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
+prop_power(p1 = 0.35, n = 220, percent.reduction = 42.857)
+prop_power(p1 = 0.35, n = 220, odds.ratio = 0.4642857)
+
 }
