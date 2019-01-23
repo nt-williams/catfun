@@ -5,9 +5,31 @@
 \title{Power and sample size for 2 proportions}
 \usage{
 prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
-  power = NULL, alternative = c("two.sided", "one.sided"),
-  strict = FALSE, tol = .Machine$double.eps^0.25, odds.ratio,
+  power = NULL, alternative = c("two.sided", "one.sided"), odds.ratio,
   percent.reduction)
+}
+\arguments{
+\item{n}{total sample size}
+
+\item{n1}{sample size in group 1}
+
+\item{n2}{sample size in group 2}
+
+\item{p1}{group 1 proportion}
+
+\item{p2}{group 2 proportion}
+
+\item{fraction}{fraction of total observations that are in group 1}
+
+\item{alpha}{signficance level/type 1 error rate}
+
+\item{power}{desired power, between 0 and 1}
+
+\item{alternative}{alternative hypothesis, one- or two-sided test}
+
+\item{odds.ratio}{odds ratio comparing p2 to p2}
+
+\item{percent.reduction}{percent reduction of p1 to p2}
 }
 \description{
 Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.

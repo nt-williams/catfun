@@ -3,14 +3,24 @@
 #'
 #' Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
 #'
+#' @param n total sample size
+#' @param n1 sample size in group 1
+#' @param n2 sample size in group 2
+#' @param p1 group 1 proportion
+#' @param p2 group 2 proportion
+#' @param fraction fraction of total observations that are in group 1
+#' @param alpha signficance level/type 1 error rate
+#' @param power desired power, between 0 and 1
+#' @param alternative alternative hypothesis, one- or two-sided test
+#' @param odds.ratio odds ratio comparing p2 to p2
+#' @param percent.reduction percent reduction of p1 to p2
+#'
 #' @importFrom Hmisc bsamsize bpower
 #' @importFrom stats power.prop.test
 #' @export
 
-prop_power <- function(n, n1, n2, p1, p2,
-                       fraction = 0.5, alpha = 0.05, power = NULL,
-                       alternative = c("two.sided", "one.sided"), strict = FALSE,
-                       tol = .Machine$double.eps^0.25, odds.ratio, percent.reduction) {
+prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = NULL,
+                       alternative = c("two.sided", "one.sided"), odds.ratio, percent.reduction) {
 
   if (fraction == 0.5) {
     if (!missing(n1) | !missing(n2)) {
@@ -34,11 +44,11 @@ prop_power <- function(n, n1, n2, p1, p2,
 
     if (missing(power)) {
       base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = NULL,
-                              alternative = alternative, strict = strict, tol = tol)
+                              alternative = alternative)
 
     } else if (missing(n)) {
       base <- power.prop.test(n = NULL, p1 = p1, p2 = p2, sig.level = alpha, power = power,
-                              alternative = alternative, strict = strict, tol = tol)
+                              alternative = alternative)
     }
 
     n <- (base$n)*2
@@ -57,7 +67,7 @@ prop_power <- function(n, n1, n2, p1, p2,
                    odds.ratio = odds.ratio, percent.reduction = percent.reduction)
 
       base <- power.prop.test(n = (n/2), p1 = p1, p2 = p2, sig.level = alpha, power = power,
-                              alternative = alternative, strict = strict, tol = tol)
+                              alternative = alternative)
 
       n <- (base$n)*2
       n1 <- n1
@@ -75,7 +85,7 @@ prop_power <- function(n, n1, n2, p1, p2,
         hm <- Hmisc::bsamsize(p1 = p1, p2 = p2, fraction = fraction, alpha = alpha, power = power)
 
         base <- power.prop.test(n = NULL, p1 = p1, p2 = p2, sig.level = alpha, power = power,
-                                alternative = alternative, strict = strict, tol = tol)
+                                alternative = alternative)
 
         n <- sum(hm[1], hm[2])
         n1 <- hm[1]
