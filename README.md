@@ -16,7 +16,7 @@ devtools::install_github("nt-williams/catfun")
 ## What’s inside
 
 catfun includes wrapper functions for hypothesis tests of proportions,
-power analyses for proportions, and funciton for calculating risk
+power analyses for proportions, and a function for calculating risk
 difference from a 2 x 2 table.
 
 For example, `prop_test()` combines the base R functions `binom.test()`,
