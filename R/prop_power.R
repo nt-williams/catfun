@@ -117,7 +117,7 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
 
   out <- list(n = n, n1 = n1, n2 = n2, power = power, p1 = p1, p2 = p2, sig.level = sig.level)
   class(out) <- "prop_power"
-  print(out)
+  out
 
 }
 
