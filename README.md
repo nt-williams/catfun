@@ -1,5 +1,5 @@
 
-# catfun <img src="..\catfun_final.png" align="right" height = "150" />
+# catfun <img src="man\figures\catfun_final.png" align="right" height = "150" />
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/catfun)](https://cran.r-project.org/package=catfun)
 [![Build
