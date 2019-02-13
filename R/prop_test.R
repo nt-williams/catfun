@@ -65,9 +65,9 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-coul
       p <- 0.5
     }
 
-    exact_test <- binom.test(x, n, alternative = alternative, conf.level = conf.level)
+    exact_test <- binom.test(x, n, p = p, alternative = alternative, conf.level = conf.level)
     if (exact == TRUE) {
-      exact_p <- exact_test$p.value
+      exact_p <- round(exact_test$p.value, 5L)
     } else {
       exact_p <- NULL
     }
@@ -86,7 +86,7 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-coul
 
   statistic <- test$statistic
   df <- test$parameter
-  p_value <- test$p.value
+  p_value <- round(test$p.value, 5L)
   estimate <- round(test$estimate, 4L)
 
   if (method == "wald") {
