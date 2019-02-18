@@ -4,8 +4,9 @@
 \alias{riskdiff}
 \title{Risk difference}
 \usage{
-riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
-  rev = c("neither", "rows", "columns", "both"), dnn = NULL)
+riskdiff(df = NULL, x = NULL, y = NULL, weight = NULL,
+  conf.level = 0.95, rev = c("neither", "rows", "columns", "both"),
+  dnn = NULL)
 }
 \arguments{
 \item{df}{a one-dimensional dataframe containing counts or a two-dimensional dataframe/matrix of counts.
@@ -42,6 +43,11 @@ trial <- data.frame(
   treatment = c(rep(c("estrogen", "placebo"), 2)),
   count = c(751, 623, 7755, 7479))
 
-riskdiff(trial, "treatment", "disease", weight = "count")
+riskdiff(trial, "treatment", "disease", weight = "count", rev = "columns")
+
+exposed <- round(runif(1000))
+diseased <- round(runif(1000))
+
+riskdiff(x = exposed, y = diseased, rev = "both")
 
 }
