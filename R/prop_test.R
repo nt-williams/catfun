@@ -89,67 +89,8 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-coul
   p_value <- round(test$p.value, 5L)
   estimate <- round(test$estimate, 4L)
 
-  if (method == "wald") {
-
-    ci <- DescTools::BinomCI(x, n, method = "wald", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "wilson") {
-
-    ci <- DescTools::BinomCI(x, n, method = "wilson", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "agresti-couli") {
-
-    ci <- DescTools::BinomCI(x, n, method = "agresti-couli", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "jeffreys") {
-
-    ci <- DescTools::BinomCI(x, n, method = "jeffreys", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "modified wilson") {
-
-    ci <- DescTools::BinomCI(x, n, method = "modified wilson", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "wilsoncc") {
-
-    ci <- DescTools::BinomCI(x, n, method = "wilsoncc", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "modified jeffreys") {
-
-    ci <- DescTools::BinomCI(x, n, method = "modified jeffreys", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "clopper-pearson") {
-
-    ci <- DescTools::BinomCI(x, n, method = "clopper-pearson", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "arcsine") {
-
-    ci <- DescTools::BinomCI(x, n, method = "arcsine", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "logit") {
-
-    ci <- DescTools::BinomCI(x, n, method = "logit", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "witting") {
-
-    ci <- DescTools::BinomCI(x, n, method = "witting", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  } else if (method == "pratt") {
-
-    ci <- DescTools::BinomCI(x, n, method = "pratt", conf.level = conf.level)
-    method_ci <- ci[, 2L:3L]
-
-  }
+  ci <- DescTools::BinomCI(x, n, method = method, conf.level = conf.level)
+  method_ci <- ci[, 2L:3L]
 
   if (length(x) > 1L) {
     rownames(method_ci) <- c()
