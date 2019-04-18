@@ -1,4 +1,3 @@
-
 #' Power and sample size for 2 proportions
 #'
 #' Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
@@ -34,9 +33,9 @@
 #' @importFrom Hmisc bsamsize bpower
 #' @importFrom stats power.prop.test
 #' @export
-
 prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = NULL,
-                       alternative = c("two.sided", "one.sided"), odds.ratio, percent.reduction) {
+                       alternative = c("two.sided", "one.sided"),
+                       odds.ratio, percent.reduction) {
 
   if (fraction == 0.5) {
     if (!missing(n1) | !missing(n2)) {
@@ -76,7 +75,6 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
     sig.level <- base$sig.level
 
   } else {
-
     if (missing(power)) {
 
       hm <- Hmisc::bpower(p1 = p1, p2 = p2, n = n, n1 = n1, n2 = n2, alpha = alpha,
@@ -93,9 +91,8 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
       power <- hm
       sig.level <- base$sig.level
 
-
     } else {
-      if (!missing(n) | !missing(n1) | !missing(n2)) {
+      if (!missing(n) || !missing(n1) || !missing(n2)) {
         stop("If given power, n, n1, and n2 must be left blank")
       } else {
         hm <- Hmisc::bsamsize(p1 = p1, p2 = p2, fraction = fraction, alpha = alpha, power = power)
@@ -118,7 +115,23 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
   out <- list(n = n, n1 = n1, n2 = n2, power = power, p1 = p1, p2 = p2, sig.level = sig.level)
   class(out) <- "prop_power"
   out
+}
 
+#' @inheritParams prop_power
+#' @export
+#' @rdname prop_power
+print.prop_power <- function(x, ...) {
+  cli::cat_line()
+  cat("Two-sample comparison of proportions\nPower calculation", "\n")
+  cat(paste(rep("-", 40L), collapse = ""), "\n")
+  cat("Total sample size:", x$n, "\n")
+  cli::cat_bullet("N1:", x$n1)
+  cli::cat_bullet("N2:", x$n2)
+  cat("Proportion 1:", x$p1, "\n")
+  cat("Proportion 2:", x$p2, "\n")
+  cat("Power:", x$power, "\n")
+  cat("Significance level:", x$sig.level, "\n")
+  cli::cat_line()
 }
 
 

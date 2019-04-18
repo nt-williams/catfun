@@ -2,11 +2,14 @@
 % Please edit documentation in R/prop_power.R
 \name{prop_power}
 \alias{prop_power}
+\alias{print.prop_power}
 \title{Power and sample size for 2 proportions}
 \usage{
 prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
   power = NULL, alternative = c("two.sided", "one.sided"), odds.ratio,
   percent.reduction)
+
+\method{print}{prop_power}(x, ...)
 }
 \arguments{
 \item{n}{total sample size}
