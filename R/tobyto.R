@@ -1,12 +1,23 @@
 
+#' Create frequency table
+#'
+#' @param ... argument calls from \code{riskdiff()}
+#'
+#' @return
+#' @export
+#'
+#' @examples
 tobyto <- function(...) UseMethod("tobyto")
 
+#' @inheritParams tobyto
+#' @export
+#' @rdname tobyto
 tobyto.matrix <- function(..., rev = c("neither", "rows", "columns", "both")) {
 
   # NEEDS IMPLEMENTATION OF ERROR CHECK
 
   decomp <- list(...)
-  x <- decomp[[1]]
+  x <- decomp[["df"]]
   rev <- match.arg(rev)
 
   if (ncol(x) > 2) stop("Only binary outcomes allowed")
@@ -14,7 +25,9 @@ tobyto.matrix <- function(..., rev = c("neither", "rows", "columns", "both")) {
   rname <- c("Exposed", "Unexposed")
   cname <- c("Outcome", "No Outcome")
 
-  dimnames(x) <- list(Exposure = rname, Outcome = cname)
+  if (is.null(decomp$dnn)) dimnames(x) <- list(Exposure = rname, Outcome = cname)
+    else dimnames(x) <- list(rname, cname)
+         names(dimnames(x)) <- dnn
 
   if (rev == "neither") x <- x
   else if (rev == "rows") x <- x[2:1, ]
@@ -24,6 +37,9 @@ tobyto.matrix <- function(..., rev = c("neither", "rows", "columns", "both")) {
   return(x)
 }
 
+#' @inheritParams tobyto
+#' @export
+#' @rdname tobyto
 tobyto.data.frame <- function(..., rev = c("neither", "rows", "columns", "both")) {
 
   # NEEDS IMPLEMENTATION OF ERROR CHECK
@@ -40,7 +56,10 @@ tobyto.data.frame <- function(..., rev = c("neither", "rows", "columns", "both")
     x <- xtabs(decomp$df[[weight]] ~ decomp$df[[pred]] + decomp$df[[outc]])
   }
 
-  names(dimnames(x)) <- c("Exposure", "Outcome")
+  if (is.null(decomp$dnn)) dnn <- c(pred, outc)
+    else dnn <- decomp$dnn
+
+  names(dimnames(x)) <- dnn
 
   if (rev == "neither") x <- x
     else if (rev == "rows") x <- x[2:1, ]
