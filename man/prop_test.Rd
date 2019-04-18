@@ -2,6 +2,7 @@
 % Please edit documentation in R/prop_test.R
 \name{prop_test}
 \alias{prop_test}
+\alias{print.prop_test}
 \title{Tests for equality of proportions}
 \usage{
 prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
@@ -9,6 +10,8 @@ prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
   "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
   alternative = c("two.sided", "less", "greater"), conf.level = 0.95,
   correct = FALSE, exact = FALSE)
+
+\method{print}{prop_test}(x, ...)
 }
 \arguments{
 \item{x}{a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns.}

@@ -1,4 +1,3 @@
-
 #' Tests for equality of proportions
 #'
 #' Run tests for equality of proportions.
@@ -39,14 +38,12 @@
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
 #'
-#' @importFrom magrittr %>%
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
-
-
-prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli", "jeffreys",
-                                                 "modified wilson", "wilsoncc", "modified jeffreys",
-                                                 "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
+prop_test <- function(x, n, p = NULL,
+                      method = c("wald", "wilson", "agresti-couli", "jeffreys",
+                                 "modified wilson", "wilsoncc", "modified jeffreys",
+                                 "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
                       alternative = c("two.sided", "less", "greater"),
                       conf.level = 0.95, correct = FALSE, exact = FALSE) {
 
@@ -102,6 +99,45 @@ prop_test <- function(x, n, p = NULL, method = c("wald", "wilson", "agresti-coul
               exact_ci = exact_ci, exact_p = exact_p, statistic = statistic, df = df, p_value = p_value)
   class(out) <- "prop_test"
   out
+}
+
+#' @inheritParams prop_test
+#' @export
+#' @rdname prop_test
+print.prop_test <- function(x, ...) {
+  if (length(x$x) == 1L) {
+    cat(x$x, " out of ", paste0(x$n, ","), " null probability = ", x$p)
+    cat("\n")
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
+    cat("Observed proportion:", x$estimate, "\n")
+    cat("Confidence interval method:", x$method, "\n")
+    cat("Confidence interval:", x$method_ci, "\n")
+    cat("\n")
+    cat("Exact limits:", x$exact_ci, "\n")
+    cat("\n")
+    cat("Test that", x$estimate, "=", x$p, "\n")
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
+    cat("Chi-squared:", x$statistic, "\n")
+    cat("Degrees freedom:", x$df, "\n")
+    cat("p-value:", x$p_value, "\n")
+    cat("\n")
+    if (!is.null(x$exact_p)) {
+      cat("Exact p-value:", x$exact_p, "\n")
+    }
+    cat("\n")
+  } else {
+    cat("Observed proportions:", "\n")
+    cli::cat_bullet(x$estimate)
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
+    cat("Confidence interval method:", x$method, "\n")
+    cat("Confidence intervals:", "\n")
+    print(x$method_ci)
+    cat(paste(rep("-", 40L), collapse = ""), "\n")
+    cat(length(x$x), "sample test for equality of proportions", "\n")
+    cat("Chi-squared:", x$statistic, "\n")
+    cat("p-value:", x$p_value)
+  }
+
 }
 
 
