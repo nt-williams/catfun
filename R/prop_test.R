@@ -139,5 +139,3 @@ print.prop_test <- function(x, ...) {
   }
 
 }
-
-

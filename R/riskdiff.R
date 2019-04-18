@@ -35,11 +35,8 @@
 #'
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
-
-
 riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
-                     rev = c("neither", "rows", "columns", "both"),
-                     dnn = NULL) {
+                     rev = c("neither", "rows", "columns", "both"), dnn = NULL) {
 
   # error checks
   if (is.matrix(x) && !is.null(y)) {
@@ -80,7 +77,20 @@ riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
 
 }
 
-
-
-
-
+#' @inheritParams riskdiff
+#' @export
+#' @rdname riskdiff
+print.rdiff <- function(x, ...) {
+  cat("\n")
+  cat("Risk difference:", x$rd, "\n")
+  cat(paste(x$conf.level * 100L, "%", sep = ""), "confidence interval:", round(x$ci, 4), "\n")
+  cat("\n")
+  cat("Proportion 1 =", round(x$p1, 4L), "\n")
+  cat("Proportion 2 =", round(x$p2, 4L), "\n")
+  cat(paste(rep("-", 40L), collapse = ""), "\n")
+  cat("\n")
+  cat("Frequency table: \n")
+  cat("\n")
+  print(x$tab)
+  cli::cat_line()
+}

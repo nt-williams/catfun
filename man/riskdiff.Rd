@@ -2,10 +2,13 @@
 % Please edit documentation in R/riskdiff.R
 \name{riskdiff}
 \alias{riskdiff}
+\alias{print.rdiff}
 \title{Risk difference}
 \usage{
 riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
   rev = c("neither", "rows", "columns", "both"), dnn = NULL)
+
+\method{print}{rdiff}(x, ...)
 }
 \arguments{
 \item{df}{a one-dimensional dataframe containing counts, a two-dimensional dataframe with binary variables x and y, or matrix of counts.
