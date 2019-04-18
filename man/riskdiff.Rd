@@ -4,25 +4,24 @@
 \alias{riskdiff}
 \title{Risk difference}
 \usage{
-riskdiff(df = NULL, x = NULL, y = NULL, weight = NULL,
-  conf.level = 0.95, rev = c("neither", "rows", "columns", "both"),
-  dnn = NULL)
+riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
+  rev = c("neither", "rows", "columns", "both"), dnn = NULL)
 }
 \arguments{
-\item{df}{a one-dimensional dataframe containing counts or a two-dimensional dataframe/matrix of counts.
+\item{df}{a one-dimensional dataframe containing counts, a two-dimensional dataframe with binary variables x and y, or matrix of counts.
 If a matrix, x and y must be NULL}
 
-\item{x}{a vector of counts or a 2x2 matrix of counts. If a matrix, df and y must be NULL}
+\item{x}{predictor/exposure, vector.}
 
-\item{y}{an optional vector of counts}
+\item{y}{outcome, vector.}
 
-\item{weight}{an optional vector of count weights}
+\item{weight}{an optional vector of count weights.}
 
-\item{conf.level}{confidence level for confidence interval, default is 0.95}
+\item{conf.level}{confidence level for confidence interval, default is 0.95.}
 
-\item{rev}{reverse order cells. Options are "row", "columns", "both", and "neither" (default)}
+\item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default).}
 
-\item{dnn}{optional character vector of dimension names}
+\item{dnn}{optional character vector of dimension names.}
 }
 \value{
 a list with class "rdiff" containing the following components:
