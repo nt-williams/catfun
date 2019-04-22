@@ -9,11 +9,12 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    epitools,  
-    DescTools, 
-    cli, 
-    magrittr, 
-    Hmisc
+    epitools,
+    DescTools,
+    cli,
+    magrittr,
+    Hmisc,
+    broom
 RoxygenNote: 6.1.1
 Suggests: 
     testthat, 
