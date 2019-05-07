@@ -45,11 +45,6 @@ trial <- data.frame(
   treatment = c(rep(c("estrogen", "placebo"), 2)),
   count = c(751, 623, 7755, 7479))
 
-riskdiff(trial, "treatment", "disease", weight = "count", rev = "columns")
-
-exposed <- round(runif(1000))
-diseased <- round(runif(1000))
-
-riskdiff(x = exposed, y = diseased, rev = "both")
+riskdiff(trial, treatment, disease, count, rev = "columns")
 
 }

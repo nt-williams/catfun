@@ -26,17 +26,16 @@
 #'   treatment = c(rep(c("estrogen", "placebo"), 2)),
 #'   count = c(751, 623, 7755, 7479))
 #'
-#' riskdiff(trial, "treatment", "disease", weight = "count", rev = "columns")
-#'
-#' exposed <- round(runif(1000))
-#' diseased <- round(runif(1000))
-#'
-#' riskdiff(x = exposed, y = diseased, rev = "both")
+#' riskdiff(trial, treatment, disease, count, rev = "columns")
 #'
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
 riskdiff <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                      rev = c("neither", "rows", "columns", "both"), dnn = NULL) {
+
+  x <- rlang::enexpr(x)
+  y <- rlang::enexpr(y)
+  weight <- rlang::enexpr(weight)
 
   # error checks
   if (is.matrix(x) && !is.null(y)) {
