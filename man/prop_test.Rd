@@ -2,36 +2,41 @@
 % Please edit documentation in R/prop_test.R
 \name{prop_test}
 \alias{prop_test}
+\alias{prop_test.default}
 \alias{prop_test.numeric}
 \alias{prop_test.table}
 \alias{prop_test.matrix}
 \alias{print.prop_test}
 \title{Tests for equality of proportions}
 \usage{
-prop_test(...)
+prop_test(x, ...)
+
+\method{prop_test}{default}(x, ...)
 
 \method{prop_test}{numeric}(x, n, p = 0.5, method = c("wald", "wilson",
   "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
   "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
   "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE)
+  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
 
 \method{prop_test}{table}(x, n, p = NULL, method = c("wald", "wilson",
   "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
   "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
   "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE)
+  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
 
 \method{prop_test}{matrix}(x, n, p = NULL, method = c("wald", "wilson",
   "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
   "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
   "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE)
+  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
 
 \method{print}{prop_test}(x, ...)
 }
 \arguments{
-\item{x}{a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns.}
+\item{x}{a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns. Used to select method.}
+
+\item{...}{further arguments passed to or from other methods.}
 
 \item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
 

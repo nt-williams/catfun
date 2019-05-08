@@ -3,6 +3,7 @@
 S3method(print,prop_power)
 S3method(print,prop_test)
 S3method(print,rdiff)
+S3method(prop_test,default)
 S3method(prop_test,matrix)
 S3method(prop_test,numeric)
 S3method(prop_test,table)
