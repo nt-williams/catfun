@@ -1,7 +1,7 @@
 #' Conduct goodness of fit for logistic regression using deviance
 #'
-#' @param working
-#' @param saturated
+#' @param working a working model of class "glm"
+#' @param saturated a saturated model of class "glm"
 #'
 #' @return
 #' @export
@@ -9,14 +9,14 @@
 #' @examples
 gof_deviance <- function(working, saturated) {
   work <- broom::glance(working) %>%
-    select(deviance, df.residual)
+    dplyr::select(deviance, df.residual)
   sat <- broom::glance(saturated) %>%
-    select(deviance, df.residual)
+    dplyr::select(deviance, df.residual)
 
-  bind_rows(work, sat) %>%
-    mutate(model = c("working", "saturated"),
-           stat = deviance - lead(deviance),
-           df = df.residual - lead(df.residual),
-           p.value = pchisq(stat, df, lower.tail = FALSE)) %>%
-    select(model, everything())
+  dplyr::bind_rows(work, sat) %>%
+    dplyr::mutate(model = c("working", "saturated"),
+           stat = deviance - dplyr::lead(deviance),
+           df = df.residual - dplyr::lead(df.residual),
+           p.value = stats::pchisq(stat, df, lower.tail = FALSE)) %>%
+    dplyr::select(model, dplyr::everything())
 }

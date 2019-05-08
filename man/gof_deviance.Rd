@@ -7,7 +7,9 @@
 gof_deviance(working, saturated)
 }
 \arguments{
-\item{saturated}{}
+\item{working}{a working model of class "glm"}
+
+\item{saturated}{a saturated model of class "glm"}
 }
 \description{
 Conduct goodness of fit for logistic regression using deviance
