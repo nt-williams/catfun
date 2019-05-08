@@ -2,27 +2,36 @@
 % Please edit documentation in R/riskdiff.R
 \name{riskdiff}
 \alias{riskdiff}
+\alias{riskdiff.data.frame}
+\alias{riskdiff.table}
+\alias{riskdiff.matrix}
 \alias{print.rdiff}
 \title{Risk difference}
 \usage{
-riskdiff(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
-  rev = c("neither", "rows", "columns", "both"), dnn = NULL)
+riskdiff(...)
+
+\method{riskdiff}{data.frame}(df, x = NULL, y = NULL, weight = NULL,
+  conf.level = 0.95, rev = c("neither", "rows", "columns", "both"),
+  dnn = NULL)
+
+\method{riskdiff}{table}(df, conf.level = 0.95, dnn = NULL)
+
+\method{riskdiff}{matrix}(df, conf.level = 0.95, dnn = NULL)
 
 \method{print}{rdiff}(x, ...)
 }
 \arguments{
-\item{df}{a one-dimensional dataframe containing counts, a two-dimensional dataframe with binary variables x and y, or matrix of counts.
-If a matrix, x and y must be NULL}
+\item{df}{a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL.}
 
-\item{x}{predictor/exposure, vector.}
+\item{x}{predictor/exposure, vector. Must be blank if df is a table or matrix.}
 
-\item{y}{outcome, vector.}
+\item{y}{outcome, vector. Must be blank if df is a table or matrix.}
 
-\item{weight}{an optional vector of count weights.}
+\item{weight}{an optional vector of count weights. Must be blank if df is a table or matrix.}
 
 \item{conf.level}{confidence level for confidence interval, default is 0.95.}
 
-\item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default).}
+\item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default). Option not available if supplying a table or matrix.}
 
 \item{dnn}{optional character vector of dimension names.}
 }
