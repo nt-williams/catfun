@@ -3,6 +3,7 @@
 \name{tobyto}
 \alias{tobyto}
 \alias{tobyto.matrix}
+\alias{tobyto.table}
 \alias{tobyto.data.frame}
 \title{Create frequency table}
 \usage{
@@ -11,11 +12,16 @@ tobyto(...)
 \method{tobyto}{matrix}(..., rev = c("neither", "rows", "columns",
   "both"))
 
+\method{tobyto}{table}(..., rev = c("neither", "rows", "columns",
+  "both"))
+
 \method{tobyto}{data.frame}(..., rev = c("neither", "rows", "columns",
   "both"))
 }
 \arguments{
 \item{...}{argument calls from \code{riskdiff()}}
+
+\item{rev}{character string indicating whether to switch row or column order, possible options are "neither", "rows", "columns", or "both". The default is "neither".}
 }
 \description{
 Create frequency table

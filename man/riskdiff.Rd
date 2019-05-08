@@ -15,11 +15,13 @@ riskdiff(df, ...)
 
 \method{riskdiff}{data.frame}(df, x = NULL, y = NULL, weight = NULL,
   conf.level = 0.95, rev = c("neither", "rows", "columns", "both"),
-  dnn = NULL, ...)
+  ...)
 
-\method{riskdiff}{table}(df, conf.level = 0.95, ...)
+\method{riskdiff}{table}(df, conf.level = 0.95, rev = c("neither",
+  "rows", "columns", "both"), ...)
 
-\method{riskdiff}{matrix}(df, conf.level = 0.95, dnn = NULL, ...)
+\method{riskdiff}{matrix}(df, conf.level = 0.95, dnn = NULL,
+  rev = c("neither", "rows", "columns", "both"), ...)
 
 \method{print}{rdiff}(x, ...)
 }
@@ -36,7 +38,7 @@ riskdiff(df, ...)
 
 \item{weight}{an optional vector of count weights. Must be blank if df is a table or matrix.}
 
-\item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default). Option not available if supplying a table or matrix.}
+\item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default).}
 
 \item{dnn}{optional character vector of dimension names.}
 }

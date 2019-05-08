@@ -8,7 +8,7 @@
 #' @param y outcome, vector. Must be blank if df is a table or matrix.
 #' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
 #' @param conf.level confidence level for confidence interval, default is 0.95.
-#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default). Option not available if supplying a table or matrix.
+#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
 #' @param dnn optional character vector of dimension names.
 #'
 #' @return a list with class "rdiff" containing the following components:
@@ -59,7 +59,7 @@ riskdiff.default <- function(df, conf.level, ...) {
 #' @export
 #' @rdname riskdiff
 riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
-                                rev = c("neither", "rows", "columns", "both"), dnn = NULL, ...) {
+                                rev = c("neither", "rows", "columns", "both"), ...) {
   x <- rlang::enexpr(x)
   y <- rlang::enexpr(y)
   weight <- rlang::enexpr(weight)
@@ -71,16 +71,22 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.table <- function(df, conf.level = 0.95, ...) {
-  tab <- df
+riskdiff.table <- function(df, conf.level = 0.95,
+                           rev = c("neither", "rows", "columns", "both"), ...) {
+  if (is.null(rev) || rev == "neither") tab <- df
+  else tab <- tobyto(df = df, rev = rev)
+
   riskdiff.default(df = tab, conf.level = conf.level)
 }
 
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, ...) {
-  tab <- df
+riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL,
+                            rev = c("neither", "rows", "columns", "both"), ...) {
+  if (is.null(rev) || rev == "neither") tab <- df
+  else tab <- tobyto(df = df, rev = rev)
+
   rname <- c("Exposed", "Unexposed")
   cname <- c("Outcome", "No Outcome")
 
