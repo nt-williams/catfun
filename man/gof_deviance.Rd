@@ -2,7 +2,7 @@
 % Please edit documentation in R/gof_deviance.R
 \name{gof_deviance}
 \alias{gof_deviance}
-\title{Conduct goodness of fit for logistic regression using deviance}
+\title{Goodness of fit for logistic regression using deviance}
 \usage{
 gof_deviance(working, saturated)
 }
@@ -11,6 +11,28 @@ gof_deviance(working, saturated)
 
 \item{saturated}{a saturated model of class "glm"}
 }
+\value{
+a data frame of class "tibble" with the following columns:
+
+\item{model}{the corresponding model}
+\item{deviance}{the deviance for corresponding model}
+\item{df.residual}{the residual degrees of freedom for corresponding model}
+\item{stat}{the test statistic, follows a chi-squared distribution}
+\item{df}{degrees of freedom for test statistic}
+\item{p.value}{p-value corresponding to test statistic and degrees of freedom}
+}
 \description{
-Conduct goodness of fit for logistic regression using deviance
+Conduct goodness of fit for logistic regression using deviance.
+}
+\examples{
+
+cad <- data.frame(gender = c(rep("male", 6), rep("female", 6)),
+                  agecat = c(rep(c("<60", "60-69", "70+"), 4)),
+                  event = c(rep(c(0, 0, 0, 1, 1, 1), 2)),
+                  count = c(110, 131, 126, 13, 37, 45, 411, 110, 189, 41, 24, 12))
+
+saturated <- glm(event ~ gender*agecat, weight = count, data = cad, family = "binomial")
+working <- glm(event ~ gender + agecat, weight = count, data = cad, family = "binomial")
+gof_deviance(working, saturated)
+
 }
