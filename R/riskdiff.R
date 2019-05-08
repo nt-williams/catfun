@@ -2,7 +2,8 @@
 #'
 #' Calculate risk difference and 95 percent confidence interval using Wald method.
 #'
-#' @param df a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL.
+#' @param df a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.
+#' @param ... further arguments passed to or from other methods.
 #' @param x predictor/exposure, vector. Must be blank if df is a table or matrix.
 #' @param y outcome, vector. Must be blank if df is a table or matrix.
 #' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
@@ -29,41 +30,12 @@
 #'
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
-riskdiff <- function(...) UseMethod("riskdiff")
+riskdiff <- function(df, ...) UseMethod("riskdiff")
 
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
-                                rev = c("neither", "rows", "columns", "both"), dnn = NULL) {
-  x <- rlang::enexpr(x)
-  y <- rlang::enexpr(y)
-  weight <- rlang::enexpr(weight)
-
-  tab <- tobyto(df = df, x = x, y = y, weight = weight, rev = rev, dnn = dnn)
-
-  p1 <- tab[1L, 1L] / sum(tab[1L, ])
-  p2 <- tab[2L, 1L] / sum(tab[2L, ])
-  rd <- round(p1 - p2, 4L)
-  z <- qnorm(0.5 * (1L + conf.level))
-  se <- sqrt((p1*(1L - p1)/sum(tab[1L, ])) + (p2*(1L - p2)/sum(tab[2L, ])))
-
-  if (rd < 0L) ci <- rd + c(1L, -1L) * z * se
-  else if (rd > 0L) ci <- rd + c(-1L, 1L) * z * se
-
-  if (ci[1L] < -1L) ci[1L] <- -1L
-  else if (ci[2L] > 1L) ci[2L] <- 1L
-
-  to_print <- list(rd = rd, conf.level = conf.level, ci = ci,
-              p1 = p1, p2 = p2, tab = tab)
-  class(to_print) <- "rdiff"
-  to_print
-}
-
-#' @inheritParams riskdiff
-#' @export
-#' @rdname riskdiff
-riskdiff.table <- function(df, conf.level = 0.95, dnn = NULL) {
+riskdiff.default <- function(df, conf.level, ...) {
   tab <- df
   p1 <- tab[1L, 1L] / sum(tab[1L, ])
   p2 <- tab[2L, 1L] / sum(tab[2L, ])
@@ -86,14 +58,29 @@ riskdiff.table <- function(df, conf.level = 0.95, dnn = NULL) {
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL) {
-  tab <- df
-  p1 <- tab[1L, 1L] / sum(tab[1L, ])
-  p2 <- tab[2L, 1L] / sum(tab[2L, ])
-  rd <- round(p1 - p2, 4L)
-  z <- qnorm(0.5 * (1L + conf.level))
-  se <- sqrt((p1*(1L - p1)/sum(tab[1L, ])) + (p2*(1L - p2)/sum(tab[2L, ])))
+riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
+                                rev = c("neither", "rows", "columns", "both"), dnn = NULL, ...) {
+  x <- rlang::enexpr(x)
+  y <- rlang::enexpr(y)
+  weight <- rlang::enexpr(weight)
+  tab <- tobyto(df = df, x = x, y = y, weight = weight, rev = rev, dnn = dnn)
 
+  riskdiff.default(df = tab, conf.level = conf.level)
+}
+
+#' @inheritParams riskdiff
+#' @export
+#' @rdname riskdiff
+riskdiff.table <- function(df, conf.level = 0.95, ...) {
+  tab <- df
+  riskdiff.default(df = tab, conf.level = conf.level)
+}
+
+#' @inheritParams riskdiff
+#' @export
+#' @rdname riskdiff
+riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, ...) {
+  tab <- df
   rname <- c("Exposed", "Unexposed")
   cname <- c("Outcome", "No Outcome")
 
@@ -103,16 +90,7 @@ riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL) {
     names(dimnames(tab)) <- dnn
   }
 
-  if (rd < 0L) ci <- rd + c(1L, -1L) * z * se
-  else if (rd > 0L) ci <- rd + c(-1L, 1L) * z * se
-
-  if (ci[1L] < -1L) ci[1L] <- -1L
-  else if (ci[2L] > 1L) ci[2L] <- 1L
-
-  to_print <- list(rd = rd, conf.level = conf.level, ci = ci,
-                   p1 = p1, p2 = p2, tab = tab)
-  class(to_print) <- "rdiff"
-  to_print
+  riskdiff.default(df = tab, conf.level = conf.level)
 }
 
 #' @inheritParams riskdiff
@@ -126,9 +104,7 @@ print.rdiff <- function(x, ...) {
   cat("Proportion 1 =", round(x$p1, 4L), "\n")
   cat("Proportion 2 =", round(x$p2, 4L), "\n")
   cat(paste(rep("-", 40L), collapse = ""), "\n")
-  cat("\n")
   cat("Frequency table: \n")
   cat("\n")
   print(x$tab)
-  cli::cat_line()
 }

@@ -2,34 +2,39 @@
 % Please edit documentation in R/riskdiff.R
 \name{riskdiff}
 \alias{riskdiff}
+\alias{riskdiff.default}
 \alias{riskdiff.data.frame}
 \alias{riskdiff.table}
 \alias{riskdiff.matrix}
 \alias{print.rdiff}
 \title{Risk difference}
 \usage{
-riskdiff(...)
+riskdiff(df, ...)
+
+\method{riskdiff}{default}(df, conf.level, ...)
 
 \method{riskdiff}{data.frame}(df, x = NULL, y = NULL, weight = NULL,
   conf.level = 0.95, rev = c("neither", "rows", "columns", "both"),
-  dnn = NULL)
+  dnn = NULL, ...)
 
-\method{riskdiff}{table}(df, conf.level = 0.95, dnn = NULL)
+\method{riskdiff}{table}(df, conf.level = 0.95, ...)
 
-\method{riskdiff}{matrix}(df, conf.level = 0.95, dnn = NULL)
+\method{riskdiff}{matrix}(df, conf.level = 0.95, dnn = NULL, ...)
 
 \method{print}{rdiff}(x, ...)
 }
 \arguments{
-\item{df}{a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL.}
+\item{df}{a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.}
+
+\item{...}{further arguments passed to or from other methods.}
+
+\item{conf.level}{confidence level for confidence interval, default is 0.95.}
 
 \item{x}{predictor/exposure, vector. Must be blank if df is a table or matrix.}
 
 \item{y}{outcome, vector. Must be blank if df is a table or matrix.}
 
 \item{weight}{an optional vector of count weights. Must be blank if df is a table or matrix.}
-
-\item{conf.level}{confidence level for confidence interval, default is 0.95.}
 
 \item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default). Option not available if supplying a table or matrix.}
 
