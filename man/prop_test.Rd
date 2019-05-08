@@ -2,14 +2,31 @@
 % Please edit documentation in R/prop_test.R
 \name{prop_test}
 \alias{prop_test}
+\alias{prop_test.numeric}
+\alias{prop_test.table}
+\alias{prop_test.matrix}
 \alias{print.prop_test}
 \title{Tests for equality of proportions}
 \usage{
-prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
-  "jeffreys", "modified wilson", "wilsoncc", "modified jeffreys",
-  "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
-  alternative = c("two.sided", "less", "greater"), conf.level = 0.95,
-  correct = FALSE, exact = FALSE)
+prop_test(...)
+
+\method{prop_test}{numeric}(x, n, p = 0.5, method = c("wald", "wilson",
+  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
+  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
+  "pratt"), alternative = c("two.sided", "less", "greater"),
+  conf.level = 0.95, correct = FALSE, exact = FALSE)
+
+\method{prop_test}{table}(x, n, p = NULL, method = c("wald", "wilson",
+  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
+  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
+  "pratt"), alternative = c("two.sided", "less", "greater"),
+  conf.level = 0.95, correct = FALSE, exact = FALSE)
+
+\method{prop_test}{matrix}(x, n, p = NULL, method = c("wald", "wilson",
+  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
+  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
+  "pratt"), alternative = c("two.sided", "less", "greater"),
+  conf.level = 0.95, correct = FALSE, exact = FALSE)
 
 \method{print}{prop_test}(x, ...)
 }
@@ -18,7 +35,7 @@ prop_test(x, n, p = NULL, method = c("wald", "wilson", "agresti-couli",
 
 \item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
 
-\item{p}{a vector of probabilities, length must be same as the number of groups specified by x.}
+\item{p}{a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.}
 
 \item{method}{a character string indicating method for calculating confidence interval, default is "wald".}
 
@@ -46,11 +63,12 @@ a list with class "prop_test" containing the following components:
 \item{exact_p}{p-value from exact test}
 }
 \description{
-Run tests for equality of proportions.
+Conduct 1-sample tests of proportions and tests for equality of k proportions.
 }
 \examples{
 prop_test(7, 50, method = "wald", p = 0.2)
 prop_test(7, 50, method = "wald", p = 0.2, exact = TRUE)
+prop_test(c(23, 24), c(50, 55))
 
 vietnam <- data.frame(
    service = c(rep("yes", 2), rep("no", 2)),
