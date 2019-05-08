@@ -7,7 +7,7 @@
 \usage{
 prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
   power = NULL, alternative = c("two.sided", "one.sided"), odds.ratio,
-  percent.reduction)
+  percent.reduction, ...)
 
 \method{print}{prop_power}(x, ...)
 }
@@ -33,6 +33,10 @@ prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
 \item{odds.ratio}{odds ratio comparing p2 to p2}
 
 \item{percent.reduction}{percent reduction of p1 to p2}
+
+\item{...}{further arguments passed to or from other methods.}
+
+\item{x}{list of class "prop_power" to be passed to print.}
 }
 \value{
 a list with class "prop_power" containing the following components:

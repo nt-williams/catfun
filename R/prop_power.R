@@ -13,6 +13,8 @@
 #' @param alternative alternative hypothesis, one- or two-sided test
 #' @param odds.ratio odds ratio comparing p2 to p2
 #' @param percent.reduction percent reduction of p1 to p2
+#' @param x list of class "prop_power" to be passed to print.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @examples
 #' prop_power(n = 220, p1 = 0.35, p2 = 0.2)
@@ -35,7 +37,7 @@
 #' @export
 prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = NULL,
                        alternative = c("two.sided", "one.sided"),
-                       odds.ratio, percent.reduction) {
+                       odds.ratio, percent.reduction, ...) {
 
   if (fraction == 0.5) {
     if (!missing(n1) | !missing(n2)) {
