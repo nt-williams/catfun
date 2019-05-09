@@ -2,27 +2,48 @@
 % Please edit documentation in R/tobyto.R
 \name{tobyto}
 \alias{tobyto}
+\alias{tobyto.data.frame}
 \alias{tobyto.matrix}
 \alias{tobyto.table}
-\alias{tobyto.data.frame}
-\title{Create frequency table}
+\title{Create 2 x 2 frequency tables}
 \usage{
-tobyto(...)
+tobyto(df, ...)
 
-\method{tobyto}{matrix}(..., rev = c("neither", "rows", "columns",
-  "both"))
+\method{tobyto}{data.frame}(df, x, y, weight = NULL, rev = c("neither",
+  "rows", "columns", "both"), ...)
 
-\method{tobyto}{table}(..., rev = c("neither", "rows", "columns",
-  "both"))
+\method{tobyto}{matrix}(df, dnn = NULL, rev = c("neither", "rows",
+  "columns", "both"), ...)
 
-\method{tobyto}{data.frame}(..., rev = c("neither", "rows", "columns",
-  "both"))
+\method{tobyto}{table}(df, rev = c("neither", "rows", "columns", "both"),
+  ...)
 }
 \arguments{
+\item{df}{a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.}
+
 \item{...}{argument calls from \code{riskdiff()}}
 
+\item{x}{predictor/exposure, vector. Must be blank if df is a table or matrix.}
+
+\item{y}{outcome, vector. Must be blank if df is a table or matrix.}
+
+\item{weight}{an optional vector of count weights. Must be blank if df is a table or matrix.}
+
 \item{rev}{character string indicating whether to switch row or column order, possible options are "neither", "rows", "columns", or "both". The default is "neither".}
+
+\item{dnn}{optional character vector of dimension names; only available if df is a matrix.}
+}
+\value{
+\item{tab}{2 x 2 frequency table}
 }
 \description{
-Create frequency table
+Create 2 x 2 frequency tables
+}
+\examples{
+trial <- data.frame(disease = c(rep("yes", 2), rep("no", 2)),
+                    treatment = c(rep(c("estrogen", "placebo"), 2)),
+                    count = c(751, 623, 7755, 7479))
+
+tobyto(trial, treatment, disease, count)
+
 }

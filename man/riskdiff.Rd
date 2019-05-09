@@ -40,7 +40,7 @@ riskdiff(df, ...)
 
 \item{rev}{reverse order of cells. Options are "row", "columns", "both", and "neither" (default).}
 
-\item{dnn}{optional character vector of dimension names.}
+\item{dnn}{optional character vector of dimension names; only available if df is a matrix.}
 }
 \value{
 a list with class "rdiff" containing the following components:

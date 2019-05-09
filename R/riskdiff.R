@@ -9,7 +9,7 @@
 #' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
 #' @param conf.level confidence level for confidence interval, default is 0.95.
 #' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
-#' @param dnn optional character vector of dimension names.
+#' @param dnn optional character vector of dimension names; only available if df is a matrix.
 #'
 #' @return a list with class "rdiff" containing the following components:
 #'
@@ -60,10 +60,11 @@ riskdiff.default <- function(df, conf.level, ...) {
 #' @rdname riskdiff
 riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                                 rev = c("neither", "rows", "columns", "both"), ...) {
-  x <- rlang::enexpr(x)
-  y <- rlang::enexpr(y)
+  pred <- rlang::enexpr(x)
+  outc <- rlang::enexpr(y)
   weight <- rlang::enexpr(weight)
-  tab <- tobyto(df = df, x = x, y = y, weight = weight, rev = rev, dnn = dnn)
+  rev <- match.arg(rev)
+  tab <- tobyto(df = df, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
 
   riskdiff.default(df = tab, conf.level = conf.level)
 }
@@ -73,7 +74,8 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
 #' @rdname riskdiff
 riskdiff.table <- function(df, conf.level = 0.95,
                            rev = c("neither", "rows", "columns", "both"), ...) {
-  if (is.null(rev) || rev == "neither") tab <- df
+  rev <- match.arg(rev)
+  if (rev == "neither") tab <- df
   else tab <- tobyto(df = df, rev = rev)
 
   riskdiff.default(df = tab, conf.level = conf.level)
@@ -84,7 +86,8 @@ riskdiff.table <- function(df, conf.level = 0.95,
 #' @rdname riskdiff
 riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL,
                             rev = c("neither", "rows", "columns", "both"), ...) {
-  if (is.null(rev) || rev == "neither") tab <- df
+  rev <- match.arg(rev)
+  if (rev == "neither") tab <- df
   else tab <- tobyto(df = df, rev = rev)
 
   rname <- c("Exposed", "Unexposed")
@@ -105,7 +108,7 @@ riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL,
 print.rdiff <- function(x, ...) {
   cat("\n")
   cat("Risk difference:", x$rd, "\n")
-  cat(paste(x$conf.level * 100L, "%", sep = ""), "confidence interval:", round(x$ci, 4), "\n")
+  cat(paste(x$conf.level * 100L, "%", sep = ""), "confidence interval:", round(x$ci, 4L), "\n")
   cat("\n")
   cat("Proportion 1 =", round(x$p1, 4L), "\n")
   cat("Proportion 2 =", round(x$p2, 4L), "\n")
@@ -113,4 +116,5 @@ print.rdiff <- function(x, ...) {
   cat("Frequency table: \n")
   cat("\n")
   print(x$tab)
+  cli::cat_line()
 }
