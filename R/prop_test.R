@@ -6,6 +6,9 @@
 #' @param ... further arguments passed to or from other methods.
 #' @param n a vector of counts of trials, ignored if x is a matrix or table.
 #' @param p a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.
+#' @param pred predictor/exposure, vector. Must be blank if x is a table or matrix.
+#' @param out outcome, vector. Must be blank if x is a table or matrix.
+#' @param weight an optional vector of count weights. Must be blank if x is a table or matrix.
 #' @param method a character string indicating method for calculating confidence interval, default is "wald".
 #' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
 #'      "greater", or "less".
@@ -26,6 +29,8 @@
 #'
 #' sleep <- xtabs(count ~ service + sleep, data = vietnam)
 #' prop_test(sleep)
+#'
+#' prop_test(vietnam, service, sleep, count)
 #'
 #' @return a list with class "prop_test" containing the following components:
 #'
@@ -60,13 +65,31 @@ prop_test.default <- function(x, ...) {
 #' @inheritParams prop_test
 #' @export
 #' @rdname prop_test
+prop_test.data.frame <- function(x, pred, out, weight = NULL, rev = c("neither", "rows", "columns", "both"),
+                                 method = c("wald", "wilson", "agresti-couli", "jeffreys",
+                                            "modified wilson", "wilsoncc", "modified jeffreys",
+                                            "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
+                                 alternative = c("two.sided", "less", "greater"),
+                                 conf.level = 0.95, correct = FALSE, exact = FALSE, ...) {
+  pred <- rlang::enexpr(pred)
+  outc <- rlang::enexpr(out)
+  weight <- rlang::enexpr(weight)
+  rev <- match.arg(rev)
+  tab <- tobyto(df = x, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
+
+  prop_test.table(x = tab, method = method, alternative = alternative,
+                  conf.level = conf.level, correct = correct, exact = exact)
+}
+
+#' @inheritParams prop_test
+#' @export
+#' @rdname prop_test
 prop_test.numeric <- function(x, n, p = .5,
                               method = c("wald", "wilson", "agresti-couli", "jeffreys",
                                          "modified wilson", "wilsoncc", "modified jeffreys",
                                          "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
                               alternative = c("two.sided", "less", "greater"),
                               conf.level = 0.95, correct = FALSE, exact = FALSE, ...) {
-
   method <- match.arg(method)
   alternative <- match.arg(alternative)
 
@@ -81,9 +104,10 @@ prop_test.numeric <- function(x, n, p = .5,
     exact_p <- NULL
   }
 
-  if (correct == FALSE) test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = FALSE)
+  if (correct == FALSE) test <- prop.test(x = x, n = n, p = p, alternative = alternative,
+                                          conf.level = conf.level, correct = FALSE)
   else {
-    test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = TRUE)
+    test <- prop.test(x = x, n = n, p = p, alternative = alternative, conf.level = conf.level, correct = TRUE)
     method <- "wilsoncc"
   }
 
@@ -108,24 +132,23 @@ prop_test.numeric <- function(x, n, p = .5,
 #' @inheritParams prop_test
 #' @export
 #' @rdname prop_test
-prop_test.table <- function(x, n, p = NULL,
-                            method = c("wald", "wilson", "agresti-couli", "jeffreys",
+prop_test.table <- function(x, method = c("wald", "wilson", "agresti-couli", "jeffreys",
                                        "modified wilson", "wilsoncc", "modified jeffreys",
                                        "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
                             alternative = c("two.sided", "less", "greater"),
                             conf.level = 0.95, correct = FALSE, exact = FALSE, ...) {
-
   method <- match.arg(method)
   alternative <- match.arg(alternative)
   n <- rowSums(x)
   x <- x[, 1L]
+  p <- NULL
   exact_ci <- NULL
   exact_p <- NULL
 
   if (correct == FALSE) {
-    test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = FALSE)
+    test <- prop.test(x = x, n = n, p = p, alternative = alternative, conf.level = conf.level, correct = FALSE)
   } else {
-    test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = TRUE)
+    test <- prop.test(x = x, n = n, p = p, alternative = alternative, conf.level = conf.level, correct = TRUE)
     method <- "wilsoncc"
   }
 
@@ -161,9 +184,10 @@ prop_test.matrix <- function(x, n, p = NULL,
   exact_ci <- NULL
   exact_p <- NULL
 
-  if (correct == FALSE) test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = FALSE)
+  if (correct == FALSE) test <- prop.test(x = x, n = n, p = p, alternative = alternative,
+                                          conf.level = conf.level, correct = FALSE)
   else {
-    test <- prop.test(x = x, n = n, p = p, alternative = alternative, correct = TRUE)
+    test <- prop.test(x = x, n = n, p = p, alternative = alternative, conf.level = conf.level, correct = TRUE)
     method <- "wilsoncc"
   }
 

@@ -3,6 +3,7 @@
 \name{prop_test}
 \alias{prop_test}
 \alias{prop_test.default}
+\alias{prop_test.data.frame}
 \alias{prop_test.numeric}
 \alias{prop_test.table}
 \alias{prop_test.matrix}
@@ -13,13 +14,20 @@ prop_test(x, ...)
 
 \method{prop_test}{default}(x, ...)
 
+\method{prop_test}{data.frame}(x, pred, out, weight = NULL,
+  rev = c("neither", "rows", "columns", "both"), method = c("wald",
+  "wilson", "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
+  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
+  "pratt"), alternative = c("two.sided", "less", "greater"),
+  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
+
 \method{prop_test}{numeric}(x, n, p = 0.5, method = c("wald", "wilson",
   "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
   "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
   "pratt"), alternative = c("two.sided", "less", "greater"),
   conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
 
-\method{prop_test}{table}(x, n, p = NULL, method = c("wald", "wilson",
+\method{prop_test}{table}(x, method = c("wald", "wilson",
   "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
   "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
   "pratt"), alternative = c("two.sided", "less", "greater"),
@@ -38,9 +46,11 @@ prop_test(x, ...)
 
 \item{...}{further arguments passed to or from other methods.}
 
-\item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
+\item{pred}{predictor/exposure, vector. Must be blank if x is a table or matrix.}
 
-\item{p}{a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.}
+\item{out}{outcome, vector. Must be blank if x is a table or matrix.}
+
+\item{weight}{an optional vector of count weights. Must be blank if x is a table or matrix.}
 
 \item{method}{a character string indicating method for calculating confidence interval, default is "wald".}
 
@@ -52,6 +62,10 @@ prop_test(x, ...)
 \item{correct}{a logical indicating whether Yate's continuity correction should be applied.}
 
 \item{exact}{a logical indicating whether to output exact p-value, ignored if k-sample test.}
+
+\item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
+
+\item{p}{a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.}
 }
 \value{
 a list with class "prop_test" containing the following components:
@@ -83,5 +97,7 @@ vietnam <- data.frame(
 
 sleep <- xtabs(count ~ service + sleep, data = vietnam)
 prop_test(sleep)
+
+prop_test(vietnam, service, sleep, count)
 
 }
