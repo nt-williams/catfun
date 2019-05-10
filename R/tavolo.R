@@ -1,7 +1,7 @@
 #' Create 2 x 2 frequency tables
 #'
 #' @param ... argument calls from \code{riskdiff()}
-#' @param df a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.
+#' @param df a dataframe with binary variable y and categorical variable x or a 2 x k frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.
 #' @param x predictor/exposure, vector. Must be blank if df is a table or matrix.
 #' @param y outcome, vector. Must be blank if df is a table or matrix.
 #' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
@@ -16,12 +16,12 @@
 #'                     treatment = c(rep(c("estrogen", "placebo"), 2)),
 #'                     count = c(751, 623, 7755, 7479))
 #'
-#' tobyto(trial, treatment, disease, count)
+#' tavolo(trial, treatment, disease, count)
 #'
 #' @export
-tobyto <- function(df, ...) UseMethod("tobyto")
+tavolo <- function(df, ...) UseMethod("tobyto")
 
-tobyto.default <- function(df, ...) {
+tavolo.default <- function(df, ...) {
   x <- df
   rev <- list(...)
 
@@ -36,7 +36,7 @@ tobyto.default <- function(df, ...) {
 #' @inheritParams tobyto
 #' @export
 #' @rdname tobyto
-tobyto.data.frame <- function(df, x, y, weight = NULL,
+tavolo.data.frame <- function(df, x, y, weight = NULL,
                               rev = c("neither", "rows", "columns", "both"), ...) {
   pred <- rlang::enexpr(x)
   outc <- rlang::enexpr(y)
@@ -52,18 +52,15 @@ tobyto.data.frame <- function(df, x, y, weight = NULL,
   dnn <- c(pred, outc)
   names(dimnames(x)) <- dnn
 
-  tobyto.default(df = x, rev = rev)
+  tavolo.default(df = x, rev = rev)
 }
 
 #' @inheritParams tobyto
 #' @export
 #' @rdname tobyto
-tobyto.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
+tavolo.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)
-
-  if (ncol(x) > 2L) stop("Only binary outcomes allowed")
-
   rname <- c("Exposed", "Unexposed")
   cname <- c("Outcome", "No Outcome")
 
@@ -73,17 +70,15 @@ tobyto.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", 
       names(dimnames(x)) <- dnn
     }
 
-  tobyto.default(df = x, rev = rev)
+  tavolo.default(df = x, rev = rev)
 }
 
 #' @inheritParams tobyto
 #' @export
 #' @rdname tobyto
-tobyto.table <- function(df, rev = c("neither", "rows", "columns", "both"), ...) {
+tavolo.table <- function(df, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)
 
-  if (ncol(x) > 2L) stop("Only binary outcomes allowed")
-
-  tobyto.default(df = x, rev = rev)
+  tavolo.default(df = x, rev = rev)
 }
