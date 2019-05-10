@@ -115,7 +115,7 @@ riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, rev = c("neither"
 #' @export
 #' @rdname riskdiff
 print.rdiff <- function(x, ...) {
-  cat("\n")
+  cli::cat_line()
   cat("Risk difference:", x$rd, "\n")
   cat(paste(x$conf.level * 100L, "%", sep = ""), "confidence interval:", round(x$ci, 4L), "\n")
   cat("\n")

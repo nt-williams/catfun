@@ -34,7 +34,7 @@ tavolo(df, ...)
 \item{dnn}{optional character vector of dimension names; only available if df is a matrix.}
 }
 \value{
-\item{tab}{2 x 2 frequency table}
+\item{tab}{2 x k frequency table}
 }
 \description{
 Create 2 x 2 frequency tables

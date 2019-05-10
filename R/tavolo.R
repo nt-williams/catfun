@@ -9,7 +9,7 @@
 #' @param rev character string indicating whether to switch row or column order, possible options are "neither", "rows", "columns", or "both". The default is "neither".
 #'
 #' @return
-#' \item{tab}{2 x 2 frequency table}
+#' \item{tab}{2 x k frequency table}
 #'
 #' @examples
 #' trial <- data.frame(disease = c(rep("yes", 2), rep("no", 2)),
