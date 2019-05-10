@@ -2,9 +2,21 @@
 % Please edit documentation in R/tavolo.R
 \name{tavolo}
 \alias{tavolo}
+\alias{tavolo.data.frame}
+\alias{tavolo.matrix}
+\alias{tavolo.table}
 \title{Create 2 x 2 frequency tables}
 \usage{
 tavolo(df, ...)
+
+\method{tavolo}{data.frame}(df, x, y, weight = NULL, rev = c("neither",
+  "rows", "columns", "both"), ...)
+
+\method{tavolo}{matrix}(df, dnn = NULL, rev = c("neither", "rows",
+  "columns", "both"), ...)
+
+\method{tavolo}{table}(df, rev = c("neither", "rows", "columns", "both"),
+  ...)
 }
 \arguments{
 \item{df}{a dataframe with binary variable y and categorical variable x or a 2 x k frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.}
@@ -17,9 +29,9 @@ tavolo(df, ...)
 
 \item{weight}{an optional vector of count weights. Must be blank if df is a table or matrix.}
 
-\item{dnn}{optional character vector of dimension names; only available if df is a matrix.}
-
 \item{rev}{character string indicating whether to switch row or column order, possible options are "neither", "rows", "columns", or "both". The default is "neither".}
+
+\item{dnn}{optional character vector of dimension names; only available if df is a matrix.}
 }
 \value{
 \item{tab}{2 x 2 frequency table}

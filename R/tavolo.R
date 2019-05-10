@@ -19,7 +19,7 @@
 #' tavolo(trial, treatment, disease, count)
 #'
 #' @export
-tavolo <- function(df, ...) UseMethod("tobyto")
+tavolo <- function(df, ...) UseMethod("tavolo")
 
 tavolo.default <- function(df, ...) {
   x <- df
@@ -33,9 +33,9 @@ tavolo.default <- function(df, ...) {
   return(x)
 }
 
-#' @inheritParams tobyto
+#' @inheritParams tavolo
 #' @export
-#' @rdname tobyto
+#' @rdname tavolo
 tavolo.data.frame <- function(df, x, y, weight = NULL,
                               rev = c("neither", "rows", "columns", "both"), ...) {
   pred <- rlang::enexpr(x)
@@ -55,9 +55,9 @@ tavolo.data.frame <- function(df, x, y, weight = NULL,
   tavolo.default(df = x, rev = rev)
 }
 
-#' @inheritParams tobyto
+#' @inheritParams tavolo
 #' @export
-#' @rdname tobyto
+#' @rdname tavolo
 tavolo.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)
@@ -73,9 +73,9 @@ tavolo.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", 
   tavolo.default(df = x, rev = rev)
 }
 
-#' @inheritParams tobyto
+#' @inheritParams tavolo
 #' @export
-#' @rdname tobyto
+#' @rdname tavolo
 tavolo.table <- function(df, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)
