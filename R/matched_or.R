@@ -1,13 +1,18 @@
-#' Title
+#' Matched pairs odds ratio and confidence interval
 #'
-#' @param df
-#' @param x
-#' @param y
-#' @param weight
-#' @param alpha
-#' @param rev
+#' @param df a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.
+#' @param ... further arguments passed to or from other methods.
+#' @param x binary vector, used as rows for frequency table and calculations; ignored if df is a table.
+#' @param y binary vector, used as columns for frequency table and calculations; ignored if df is a table.
+#' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
+#' @param alpha level of significance for confidence interval.
+#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
 #'
-#' @return
+#' @return a list with class "matched_or" with the following components:
+#'
+#' \item{tab}{2x2 table using for calculating risk difference}
+#' \item{or}{dataframe with columns corresponding to matched-pairs OR, lower bound, and upper bound of CI}
+#' \item{conf.level}{specified confidence level}
 #'
 #' @examples
 #'
