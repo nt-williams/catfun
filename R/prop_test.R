@@ -75,7 +75,7 @@ prop_test.data.frame <- function(x, pred, out, weight = NULL, rev = c("neither",
   outc <- rlang::enexpr(out)
   weight <- rlang::enexpr(weight)
   rev <- match.arg(rev)
-  tab <- tobyto(df = x, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
+  tab <- tavolo(df = x, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
 
   prop_test.table(x = tab, method = method, alternative = alternative,
                   conf.level = conf.level, correct = correct, exact = exact)
@@ -211,8 +211,8 @@ prop_test.matrix <- function(x, n, p = NULL,
 #' @rdname prop_test
 print.prop_test <- function(x, ...) {
   if (length(x$x) == 1L) {
-    cat(x$x, " out of ", paste0(x$n, ","), " null probability = ", x$p)
-    cat("\n")
+    cli::cat_line()
+    cat(x$x, " out of ", paste0(x$n, ","), " null probability = ", x$p, "\n")
     cat(paste(rep("-", 40L), collapse = ""), "\n")
     cat("Observed proportion:", x$estimate, "\n")
     cat("Confidence interval method:", x$method, "\n")
@@ -229,6 +229,7 @@ print.prop_test <- function(x, ...) {
       cat("Exact p-value:", x$exact_p, "\n")
     }
   } else {
+    cli::cat_line()
     cat("Observed proportions:", "\n")
     cli::cat_bullet(x$estimate)
     cat(paste(rep("-", 40L), collapse = ""), "\n")
@@ -238,7 +239,7 @@ print.prop_test <- function(x, ...) {
     cat(paste(rep("-", 40L), collapse = ""), "\n")
     cat(length(x$x), "sample test for equality of proportions", "\n")
     cat("Chi-squared:", x$statistic, "\n")
-    cat("p-value:", x$p_value)
+    cat("p-value:", x$p_value, "\n")
     cli::cat_line()
   }
 }

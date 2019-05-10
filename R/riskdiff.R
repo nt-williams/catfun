@@ -49,8 +49,7 @@ riskdiff.default <- function(df, conf.level, ...) {
   if (ci[1L] < -1L) ci[1L] <- -1L
   else if (ci[2L] > 1L) ci[2L] <- 1L
 
-  to_print <- list(rd = rd, conf.level = conf.level, ci = ci,
-                   p1 = p1, p2 = p2, tab = tab)
+  to_print <- list(rd = rd, conf.level = conf.level, ci = ci,p1 = p1, p2 = p2, tab = tab)
   class(to_print) <- "rdiff"
   to_print
 }
@@ -62,9 +61,13 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
                                 rev = c("neither", "rows", "columns", "both"), ...) {
   pred <- rlang::enexpr(x)
   outc <- rlang::enexpr(y)
+
+  if (length(levels(df[[pred]])) > 2L) stop("Only binary predictors and outcomes allowed")
+  else if (length(levels(df[[outc]])) > 2L) stop("Only binary predictors and outcomes allowed")
+
   weight <- rlang::enexpr(weight)
   rev <- match.arg(rev)
-  tab <- tobyto(df = df, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
+  tab <- tavolo(df = df, x = !!pred, y = !!outc, weight = !!weight, rev = rev)
 
   riskdiff.default(df = tab, conf.level = conf.level)
 }
@@ -72,11 +75,14 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.table <- function(df, conf.level = 0.95,
-                           rev = c("neither", "rows", "columns", "both"), ...) {
+riskdiff.table <- function(df, conf.level = 0.95, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
+
+  if (nrow(df) > 2L) stop("Only binary predictors and outcomes allowed")
+  else if (ncol(df) > 2L) stop("Only binary predictors and outcomes allowed")
+
   if (rev == "neither") tab <- df
-  else tab <- tobyto(df = df, rev = rev)
+  else tab <- tavolo(df = df, rev = rev)
 
   riskdiff.default(df = tab, conf.level = conf.level)
 }
@@ -84,11 +90,14 @@ riskdiff.table <- function(df, conf.level = 0.95,
 #' @inheritParams riskdiff
 #' @export
 #' @rdname riskdiff
-riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL,
-                            rev = c("neither", "rows", "columns", "both"), ...) {
+riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
+
+  if (nrow(df) > 2L) stop("Only binary predictors and outcomes allowed")
+  else if (ncol(df) > 2L) stop("Only binary predictors and outcomes allowed")
+
   if (rev == "neither") tab <- df
-  else tab <- tobyto(df = df, rev = rev)
+  else tab <- tavolo(df = df, rev = rev)
 
   rname <- c("Exposed", "Unexposed")
   cname <- c("Outcome", "No Outcome")
