@@ -4,12 +4,6 @@
 #'
 #' @param df a dataframe with binary variables x and y or a 2 x 2 frequency table/matrix. If a table or matrix, x and y must be NULL. Used to select method.
 #' @param ... further arguments passed to or from other methods.
-#' @param x predictor/exposure, vector. Must be blank if df is a table or matrix.
-#' @param y outcome, vector. Must be blank if df is a table or matrix.
-#' @param weight an optional vector of count weights. Must be blank if df is a table or matrix.
-#' @param conf.level confidence level for confidence interval, default is 0.95.
-#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
-#' @param dnn optional character vector of dimension names; only available if df is a matrix.
 #'
 #' @return a list with class "rdiff" containing the following components:
 #'
@@ -32,9 +26,7 @@
 #' @export
 riskdiff <- function(df, ...) UseMethod("riskdiff")
 
-#' @inheritParams riskdiff
 #' @export
-#' @rdname riskdiff
 riskdiff.default <- function(df, conf.level, ...) {
   tab <- df
   p1 <- tab[1L, 1L] / sum(tab[1L, ])
@@ -54,9 +46,35 @@ riskdiff.default <- function(df, conf.level, ...) {
   to_print
 }
 
-#' @inheritParams riskdiff
+#' Risk difference
+#'
+#' Calculate risk difference and 95 percent confidence interval using Wald method.
+#'
+#' @param df a dataframe with binary variables x and y.
+#' @param x binary predictor/exposure, vector.
+#' @param y binary outcome, vector.
+#' @param weight an optional vector of count weights.
+#' @param conf.level confidence level for confidence interval, default is 0.95.
+#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
+#' @param ... further arguments passed to or from other methods.
+#'
+#' @return a list with class "rdiff" containing the following components:
+#'
+#' \item{rd}{risk difference}
+#' \item{conf.level}{specified confidence level}
+#' \item{ci}{calculated confidence interval}
+#' \item{p1}{proportion one}
+#' \item{p2}{proportion two}
+#' \item{tab}{2x2 table using for calculating risk difference}
 #' @export
-#' @rdname riskdiff
+#'
+#' @examples
+#' trial <- data.frame(
+#'   disease = c(rep("yes", 2), rep("no", 2)),
+#'   treatment = c(rep(c("estrogen", "placebo"), 2)),
+#'   count = c(751, 623, 7755, 7479))
+#'
+#' riskdiff(trial, treatment, disease, count, rev = "columns")
 riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.level = 0.95,
                                 rev = c("neither", "rows", "columns", "both"), ...) {
   pred <- rlang::enexpr(x)
@@ -72,9 +90,32 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
   riskdiff.default(df = tab, conf.level = conf.level)
 }
 
-#' @inheritParams riskdiff
+#' Risk difference
+#'
+#' Calculate risk difference and 95 percent confidence interval using Wald method.
+#'
+#' @param df a 2 x 2 frequency table.
+#' @param conf.level confidence level for confidence interval, default is 0.95.
+#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
+#' @param ... further arguments passed to or from other methods.
+#'
+#' @return a list with class "rdiff" containing the following components:
+#'
+#' \item{rd}{risk difference}
+#' \item{conf.level}{specified confidence level}
+#' \item{ci}{calculated confidence interval}
+#' \item{p1}{proportion one}
+#' \item{p2}{proportion two}
+#' \item{tab}{2x2 table using for calculating risk difference}
 #' @export
-#' @rdname riskdiff
+#'
+#' @examples
+#' trial <- data.frame(
+#'   disease = c(rep("yes", 2), rep("no", 2)),
+#'   treatment = c(rep(c("estrogen", "placebo"), 2)),
+#'   count = c(751, 623, 7755, 7479))
+#'
+#' xtabs(count ~ treatment + disease, data = trial) %>% riskdiff.table()
 riskdiff.table <- function(df, conf.level = 0.95, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
 
@@ -87,9 +128,29 @@ riskdiff.table <- function(df, conf.level = 0.95, rev = c("neither", "rows", "co
   riskdiff.default(df = tab, conf.level = conf.level)
 }
 
-#' @inheritParams riskdiff
+#' Risk difference
+#'
+#' Calculate risk difference and 95 percent confidence interval using Wald method.
+#'
+#' @param df a 2 x 2 frequency matrix.
+#' @param conf.level confidence level for confidence interval, default is 0.95.
+#' @param dnn optional character vector of dimension names.
+#' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
+#' @param ... further arguments passed to or from other methods.
+#'
+#' @return a list with class "rdiff" containing the following components:
+#'
+#' \item{rd}{risk difference}
+#' \item{conf.level}{specified confidence level}
+#' \item{ci}{calculated confidence interval}
+#' \item{p1}{proportion one}
+#' \item{p2}{proportion two}
+#' \item{tab}{2x2 table using for calculating risk difference}
 #' @export
-#' @rdname riskdiff
+#'
+#' @examples
+#' matrix(c(12, 45, 69, 15), nrow = 2, ncol = 2) %>%
+#'    riskdiff.matrix(dnn = c("New Drug", "Adverse Outcome"))
 riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
 
@@ -111,9 +172,7 @@ riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, rev = c("neither"
   riskdiff.default(df = tab, conf.level = conf.level)
 }
 
-#' @inheritParams riskdiff
 #' @export
-#' @rdname riskdiff
 print.rdiff <- function(x, ...) {
   cli::cat_line()
   cat("Risk difference:", x$rd, "\n")

@@ -2,41 +2,36 @@
 % Please edit documentation in R/prop_power.R
 \name{prop_power}
 \alias{prop_power}
-\alias{print.prop_power}
 \title{Power and sample size for 2 proportions}
 \usage{
 prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
   power = NULL, alternative = c("two.sided", "one.sided"), odds.ratio,
   percent.reduction, ...)
-
-\method{print}{prop_power}(x, ...)
 }
 \arguments{
-\item{n}{total sample size}
+\item{n}{total sample size.}
 
-\item{n1}{sample size in group 1}
+\item{n1}{sample size in group 1.}
 
-\item{n2}{sample size in group 2}
+\item{n2}{sample size in group 2.}
 
-\item{p1}{group 1 proportion}
+\item{p1}{group 1 proportion.}
 
-\item{p2}{group 2 proportion}
+\item{p2}{group 2 proportion.}
 
-\item{fraction}{fraction of total observations that are in group 1}
+\item{fraction}{fraction of total observations that are in group 1.}
 
-\item{alpha}{signficance level/type 1 error rate}
+\item{alpha}{signficance level/type 1 error rate.}
 
-\item{power}{desired power, between 0 and 1}
+\item{power}{desired power, between 0 and 1.}
 
-\item{alternative}{alternative hypothesis, one- or two-sided test}
+\item{alternative}{alternative hypothesis, one- or two-sided test.}
 
-\item{odds.ratio}{odds ratio comparing p2 to p2}
+\item{odds.ratio}{odds ratio comparing p2 to p2.}
 
-\item{percent.reduction}{percent reduction of p1 to p2}
+\item{percent.reduction}{percent reduction of p1 to p2.}
 
 \item{...}{further arguments passed to or from other methods.}
-
-\item{x}{list of class "prop_power" to be passed to print.}
 }
 \value{
 a list with class "prop_power" containing the following components:

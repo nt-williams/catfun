@@ -2,70 +2,14 @@
 % Please edit documentation in R/prop_test.R
 \name{prop_test}
 \alias{prop_test}
-\alias{prop_test.default}
-\alias{prop_test.data.frame}
-\alias{prop_test.numeric}
-\alias{prop_test.table}
-\alias{prop_test.matrix}
-\alias{print.prop_test}
 \title{Tests for equality of proportions}
 \usage{
 prop_test(x, ...)
-
-\method{prop_test}{default}(x, ...)
-
-\method{prop_test}{data.frame}(x, pred, out, weight = NULL,
-  rev = c("neither", "rows", "columns", "both"), method = c("wald",
-  "wilson", "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
-  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
-  "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
-
-\method{prop_test}{numeric}(x, n, p = 0.5, method = c("wald", "wilson",
-  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
-  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
-  "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
-
-\method{prop_test}{table}(x, method = c("wald", "wilson",
-  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
-  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
-  "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
-
-\method{prop_test}{matrix}(x, n, p = NULL, method = c("wald", "wilson",
-  "agresti-couli", "jeffreys", "modified wilson", "wilsoncc",
-  "modified jeffreys", "clopper-pearson", "arcsine", "logit", "witting",
-  "pratt"), alternative = c("two.sided", "less", "greater"),
-  conf.level = 0.95, correct = FALSE, exact = FALSE, ...)
-
-\method{print}{prop_test}(x, ...)
 }
 \arguments{
 \item{x}{a vector of counts, a one-dimensional table with two entries, or a two-dimensional table with 2 columns. Used to select method.}
 
 \item{...}{further arguments passed to or from other methods.}
-
-\item{pred}{predictor/exposure, vector. Must be blank if x is a table or matrix.}
-
-\item{out}{outcome, vector. Must be blank if x is a table or matrix.}
-
-\item{weight}{an optional vector of count weights. Must be blank if x is a table or matrix.}
-
-\item{method}{a character string indicating method for calculating confidence interval, default is "wald".}
-
-\item{alternative}{character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
-"greater", or "less".}
-
-\item{conf.level}{confidence level for confidence interval, default is 0.95.}
-
-\item{correct}{a logical indicating whether Yate's continuity correction should be applied.}
-
-\item{exact}{a logical indicating whether to output exact p-value, ignored if k-sample test.}
-
-\item{n}{a vector of counts of trials, ignored if x is a matrix or table.}
-
-\item{p}{a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.}
 }
 \value{
 a list with class "prop_test" containing the following components:

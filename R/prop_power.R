@@ -2,18 +2,17 @@
 #'
 #' Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
 #'
-#' @param n total sample size
-#' @param n1 sample size in group 1
-#' @param n2 sample size in group 2
-#' @param p1 group 1 proportion
-#' @param p2 group 2 proportion
-#' @param fraction fraction of total observations that are in group 1
-#' @param alpha signficance level/type 1 error rate
-#' @param power desired power, between 0 and 1
-#' @param alternative alternative hypothesis, one- or two-sided test
-#' @param odds.ratio odds ratio comparing p2 to p2
-#' @param percent.reduction percent reduction of p1 to p2
-#' @param x list of class "prop_power" to be passed to print.
+#' @param n total sample size.
+#' @param n1 sample size in group 1.
+#' @param n2 sample size in group 2.
+#' @param p1 group 1 proportion.
+#' @param p2 group 2 proportion.
+#' @param fraction fraction of total observations that are in group 1.
+#' @param alpha signficance level/type 1 error rate.
+#' @param power desired power, between 0 and 1.
+#' @param alternative alternative hypothesis, one- or two-sided test.
+#' @param odds.ratio odds ratio comparing p2 to p2.
+#' @param percent.reduction percent reduction of p1 to p2.
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @examples
@@ -119,9 +118,7 @@ prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = 
   out
 }
 
-#' @inheritParams prop_power
 #' @export
-#' @rdname prop_power
 print.prop_power <- function(x, ...) {
   cli::cat_line()
   cat("Two-sample comparison of proportions\nPower calculation", "\n")
