@@ -38,5 +38,5 @@ gene <- data.frame(pair = seq(1:35),
                    ulcer = rbinom(35, 1, .7),
                    healthy = rbinom(35, 1, .4))
 
-matched_or.data.frame(gene, ulcer, healthy)
+matched_or(gene, ulcer, healthy)
 }

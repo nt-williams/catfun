@@ -33,5 +33,5 @@ gene <- data.frame(pair = seq(1:35),
 
 gene_tab <- xtabs(~ ulcer + healthy, data = gene)
 
-gene_tab \%>\% matched_or.table()
+gene_tab \%>\% matched_or()
 }

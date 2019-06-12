@@ -85,7 +85,7 @@ tavolo.data.frame <- function(df, x, y, weight = NULL,
 #' @export
 #'
 #' @examples
-#' tavolo.matrix(matrix(c(23, 45, 67, 12), nrow = 2, ncol = 2), rev = "both")
+#' tavolo(matrix(c(23, 45, 67, 12), nrow = 2, ncol = 2), rev = "both")
 tavolo.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)
@@ -118,7 +118,7 @@ tavolo.matrix <- function(df, dnn = NULL, rev = c("neither", "rows", "columns", 
 #'                     treatment = rep(c("estrogen", "placebo", "other"), 2),
 #'                     count = c(751, 623, 7755, 7479, 9000, 456))
 #'
-#' xtabs(count ~ treatment + disease, data = trial) %>% tavolo.table(rev = "columns")
+#' xtabs(count ~ treatment + disease, data = trial) %>% tavolo(rev = "columns")
 tavolo.table <- function(df, rev = c("neither", "rows", "columns", "both"), ...) {
   x <- df
   rev <- match.arg(rev)

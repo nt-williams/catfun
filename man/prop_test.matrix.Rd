@@ -45,5 +45,5 @@ a list with class "prop_test" containing the following components:
 Conduct 1-sample tests of proportions and tests for equality of k proportions.
 }
 \examples{
-matrix(c(23, 48, 76, 88), nrow = 2, ncol = 2) \%>\% prop_test.matrix()
+matrix(c(23, 48, 76, 88), nrow = 2, ncol = 2) \%>\% prop_test()
 }

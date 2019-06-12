@@ -46,6 +46,7 @@ matched_or.default <- function(df, ...) {
 #' \item{tab}{2x2 table using for calculating risk difference}
 #' \item{or}{dataframe with columns corresponding to matched-pairs OR, lower bound, and upper bound of CI}
 #' \item{conf.level}{specified confidence level}
+#'
 #' @export
 #'
 #' @examples
@@ -54,7 +55,7 @@ matched_or.default <- function(df, ...) {
 #'                    ulcer = rbinom(35, 1, .7),
 #'                    healthy = rbinom(35, 1, .4))
 #'
-#' matched_or.data.frame(gene, ulcer, healthy)
+#' matched_or(gene, ulcer, healthy)
 matched_or.data.frame <- function(df, x, y, weight = NULL,
                                  alpha = 0.05, rev = c("neither", "rows", "columns", "both"), ...) {
   pred <- rlang::enexpr(x)
@@ -80,6 +81,7 @@ matched_or.data.frame <- function(df, x, y, weight = NULL,
 #' \item{tab}{2x2 table using for calculating risk difference}
 #' \item{or}{dataframe with columns corresponding to matched-pairs OR, lower bound, and upper bound of CI}
 #' \item{conf.level}{specified confidence level}
+#'
 #' @export
 #'
 #' @examples
@@ -89,7 +91,7 @@ matched_or.data.frame <- function(df, x, y, weight = NULL,
 #'
 #' gene_tab <- xtabs(~ ulcer + healthy, data = gene)
 #'
-#' gene_tab %>% matched_or.table()
+#' gene_tab %>% matched_or()
 matched_or.table <- function(df, alpha = 0.05, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
 

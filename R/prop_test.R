@@ -79,6 +79,7 @@ prop_test.default <- function(x, ...) {
 #' \item{method_ci}{confidence interval calculated using specified method}
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
+#'
 #' @export
 #'
 #' @examples
@@ -133,6 +134,7 @@ prop_test.data.frame <- function(x, pred, out, weight = NULL, rev = c("neither",
 #' \item{method_ci}{confidence interval calculated using specified method}
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
+#'
 #' @export
 #'
 #' @examples
@@ -209,6 +211,7 @@ prop_test.numeric <- function(x, n, p = .5,
 #' \item{method_ci}{confidence interval calculated using specified method}
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
+#'
 #' @export
 #'
 #' @examples
@@ -218,7 +221,7 @@ prop_test.numeric <- function(x, n, p = .5,
 #'      count = c(173, 160, 599, 851, 400, 212)
 #' )
 #'
-#' xtabs(count ~ service + sleep, data = vietnam) %>% prop_test.table()
+#' xtabs(count ~ service + sleep, data = vietnam) %>% prop_test()
 prop_test.table <- function(x, method = c("wald", "wilson", "agresti-couli", "jeffreys",
                                        "modified wilson", "wilsoncc", "modified jeffreys",
                                        "clopper-pearson", "arcsine", "logit", "witting", "pratt"),
@@ -280,10 +283,11 @@ prop_test.table <- function(x, method = c("wald", "wilson", "agresti-couli", "je
 #' \item{method_ci}{confidence interval calculated using specified method}
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
+#'
 #' @export
 #'
 #' @examples
-#' matrix(c(23, 48, 76, 88), nrow = 2, ncol = 2) %>% prop_test.matrix()
+#' matrix(c(23, 48, 76, 88), nrow = 2, ncol = 2) %>% prop_test()
 prop_test.matrix <- function(x, method = c("wald", "wilson", "agresti-couli", "jeffreys",
                                         "modified wilson", "wilsoncc", "modified jeffreys",
                                         "clopper-pearson", "arcsine", "logit", "witting", "pratt"),

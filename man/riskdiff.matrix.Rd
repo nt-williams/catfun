@@ -33,5 +33,5 @@ Calculate risk difference and 95 percent confidence interval using Wald method.
 }
 \examples{
 matrix(c(12, 45, 69, 15), nrow = 2, ncol = 2) \%>\%
-   riskdiff.matrix(dnn = c("New Drug", "Adverse Outcome"))
+   riskdiff(dnn = c("New Drug", "Adverse Outcome"))
 }

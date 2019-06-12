@@ -23,5 +23,5 @@
 Helper function for creating 2 x k frequency tables.
 }
 \examples{
-tavolo.matrix(matrix(c(23, 45, 67, 12), nrow = 2, ncol = 2), rev = "both")
+tavolo(matrix(c(23, 45, 67, 12), nrow = 2, ncol = 2), rev = "both")
 }

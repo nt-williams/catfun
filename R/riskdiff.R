@@ -115,7 +115,7 @@ riskdiff.data.frame <- function(df, x = NULL, y = NULL, weight = NULL, conf.leve
 #'   treatment = c(rep(c("estrogen", "placebo"), 2)),
 #'   count = c(751, 623, 7755, 7479))
 #'
-#' xtabs(count ~ treatment + disease, data = trial) %>% riskdiff.table()
+#' xtabs(count ~ treatment + disease, data = trial) %>% riskdiff()
 riskdiff.table <- function(df, conf.level = 0.95, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
 
@@ -150,7 +150,7 @@ riskdiff.table <- function(df, conf.level = 0.95, rev = c("neither", "rows", "co
 #'
 #' @examples
 #' matrix(c(12, 45, 69, 15), nrow = 2, ncol = 2) %>%
-#'    riskdiff.matrix(dnn = c("New Drug", "Adverse Outcome"))
+#'    riskdiff(dnn = c("New Drug", "Adverse Outcome"))
 riskdiff.matrix <- function(df, conf.level = 0.95, dnn = NULL, rev = c("neither", "rows", "columns", "both"), ...) {
   rev <- match.arg(rev)
 

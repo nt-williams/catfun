@@ -51,5 +51,5 @@ vietnam <- data.frame(
      count = c(173, 160, 599, 851, 400, 212)
 )
 
-xtabs(count ~ service + sleep, data = vietnam) \%>\% prop_test.table()
+xtabs(count ~ service + sleep, data = vietnam) \%>\% prop_test()
 }

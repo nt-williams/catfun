@@ -35,5 +35,5 @@ trial <- data.frame(
   treatment = c(rep(c("estrogen", "placebo"), 2)),
   count = c(751, 623, 7755, 7479))
 
-xtabs(count ~ treatment + disease, data = trial) \%>\% riskdiff.table()
+xtabs(count ~ treatment + disease, data = trial) \%>\% riskdiff()
 }

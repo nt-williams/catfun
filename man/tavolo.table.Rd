@@ -25,5 +25,5 @@ trial <- data.frame(disease = c(rep("yes", 3), rep("no", 3)),
                     treatment = rep(c("estrogen", "placebo", "other"), 2),
                     count = c(751, 623, 7755, 7479, 9000, 456))
 
-xtabs(count ~ treatment + disease, data = trial) \%>\% tavolo.table(rev = "columns")
+xtabs(count ~ treatment + disease, data = trial) \%>\% tavolo(rev = "columns")
 }
