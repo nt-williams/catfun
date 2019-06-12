@@ -1,10 +1,10 @@
 Package: catfun
 Type: Package
 Title: Functions for P8120
-Version: 0.1.1.9000
+Version: 0.1.2.9000
 Author: Nick Williams
-Maintainer: Nick Williams <ntw2117@cumc.columbia.edu>
-Description: R functions for course P8120 at Columbia University.
+Maintainer: Nick Williams <ntwilliams.personal@gmail.com>
+Description: Wrapper functions for the analysis of categorical data. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

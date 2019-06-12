@@ -1,4 +1,5 @@
 ^LICENSE\.md$
+^cran-comments.md$
 ^README\.Rmd$
 ^\.travis\.yml$
 ^.*\.Rproj$
