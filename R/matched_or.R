@@ -31,7 +31,7 @@ matched_or.default <- function(df, ...) {
 
 #' Matched pairs odds ratio from a data frame
 #'
-#' #' Create odds ratio and confidence interval from matched pairs data.
+#' Create odds ratio and confidence interval from matched pairs data.
 #'
 #' @param df a dataframe with binary variables x and y.
 #' @param x binary vector, used as rows for frequency table and calculations.

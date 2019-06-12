@@ -30,7 +30,7 @@ a list with class "matched_or" with the following components:
 \item{conf.level}{specified confidence level}
 }
 \description{
-#' Create odds ratio and confidence interval from matched pairs data.
+Create odds ratio and confidence interval from matched pairs data.
 }
 \examples{
 
