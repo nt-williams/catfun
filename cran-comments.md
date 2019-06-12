@@ -5,7 +5,11 @@
 
 ## R CMD check results
 
-There were no ERRORS, WARNINGS, or NOTES. 
+There were no ERRORS or WARNINGS. 
+
+1 Note: This is the package's first submission. 
+
+* "Maintainer: 'Nick Williams <ntwilliams.personal@gmail.com>  New Submission"
 
 ## Downstream dependencies
 
@@ -13,5 +17,5 @@ There are no downstreatm dependencies.
 
 ## Other
 
-This is the package's first submission. 
+N/A
 
