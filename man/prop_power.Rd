@@ -21,7 +21,7 @@ prop_power(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05,
 
 \item{fraction}{fraction of total observations that are in group 1.}
 
-\item{alpha}{signficance level/type 1 error rate.}
+\item{alpha}{significance level/type 1 error rate.}
 
 \item{power}{desired power, between 0 and 1.}
 
@@ -42,10 +42,10 @@ a list with class "prop_power" containing the following components:
 \item{p1}{the proportion in group 1}
 \item{p2}{the proportion in group 2}
 \item{power}{calculated or desired power}
-\item{sig.level}{level of signficance}
+\item{sig.level}{level of significance}
 }
 \description{
-Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
+Calculate power and sample size for comparison of 2 proportions for both balanced and unbalanced designs.
 }
 \examples{
 prop_power(n = 220, p1 = 0.35, p2 = 0.2)

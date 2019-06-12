@@ -17,7 +17,7 @@ devtools::install_github("nt-williams/catfun")
 
 R currently supports a wide variety of tools for the analysis of
 categorical data. However, many functions are spread across a variety of
-packages with differing syntax and poor compatability withone another.
+packages with differing syntax and poor compatibility with each another.
 
 To address this issue, *catfun* includes wrapper functions around
 existing functions for tests of proportions, power analyses for

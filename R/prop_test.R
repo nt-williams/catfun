@@ -60,7 +60,7 @@ prop_test.default <- function(x, ...) {
 #' @param rev reverse order of cells. Options are "row", "columns", "both", and "neither" (default).
 #' @param method a character string indicating method for calculating confidence interval, default is "wald". Options include,
 #'        wald, wilson, agresti-couli, jeffreys, modified wilson, wilsoncc modified jeffreys, clopper-pearson, arcsine, logit, witting, and pratt.
-#' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+#' @param alternative character string specifying the alternative hypothesis. Possible options are "two.sided" (default),
 #'        "greater", or "less".
 #' @param conf.level confidence level for confidence interval, default is 0.95.
 #' @param correct a logical indicating whether Yate's continuity correction should be applied.
@@ -115,7 +115,7 @@ prop_test.data.frame <- function(x, pred, out, weight = NULL, rev = c("neither",
 #' @param p a probability for the null hypothesis when testing a single proportion; ignored if comparing multiple proportions.
 #' @param method a character string indicating method for calculating confidence interval, default is "wald". Options include,
 #'        wald, wilson, agresti-couli, jeffreys, modified wilson, wilsoncc modified jeffreys, clopper-pearson, arcsine, logit, witting, and pratt.
-#' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+#' @param alternative character string specifying the alternative hypothesis. Possible options are "two.sided" (default),
 #'        "greater", or "less".
 #' @param conf.level confidence level for confidence interval, default is 0.95.
 #' @param correct a logical indicating whether Yate's continuity correction should be applied.
@@ -192,7 +192,7 @@ prop_test.numeric <- function(x, n, p = .5,
 #' @param x a 2 x k table.
 #' @param method a character string indicating method for calculating confidence interval, default is "wald". Options include,
 #'        wald, wilson, agresti-couli, jeffreys, modified wilson, wilsoncc modified jeffreys, clopper-pearson, arcsine, logit, witting, and pratt.
-#' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+#' @param alternative character string specifying the alternative hypothesis. Possible options are "two.sided" (default),
 #'        "greater", or "less".
 #' @param conf.level confidence level for confidence interval, default is 0.95.
 #' @param correct a logical indicating whether Yate's continuity correction should be applied.
@@ -264,7 +264,7 @@ prop_test.table <- function(x, method = c("wald", "wilson", "agresti-couli", "je
 #' @param x a 2 x k matrix.
 #' @param method a character string indicating method for calculating confidence interval, default is "wald". Options include,
 #'        wald, wilson, agresti-couli, jeffreys, modified wilson, wilsoncc modified jeffreys, clopper-pearson, arcsine, logit, witting, and pratt.
-#' @param alternative character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+#' @param alternative character string specifying the alternative hypothesis. Possible options are "two.sided" (default),
 #'        "greater", or "less".
 #' @param conf.level confidence level for confidence interval, default is 0.95.
 #' @param correct a logical indicating whether Yate's continuity correction should be applied.

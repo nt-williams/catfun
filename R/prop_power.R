@@ -1,6 +1,6 @@
 #' Power and sample size for 2 proportions
 #'
-#' Calculate power and sample size for comparison of 2 proportions for both balanced and ubalanced designs.
+#' Calculate power and sample size for comparison of 2 proportions for both balanced and unbalanced designs.
 #'
 #' @param n total sample size.
 #' @param n1 sample size in group 1.
@@ -8,7 +8,7 @@
 #' @param p1 group 1 proportion.
 #' @param p2 group 2 proportion.
 #' @param fraction fraction of total observations that are in group 1.
-#' @param alpha signficance level/type 1 error rate.
+#' @param alpha significance level/type 1 error rate.
 #' @param power desired power, between 0 and 1.
 #' @param alternative alternative hypothesis, one- or two-sided test.
 #' @param odds.ratio odds ratio comparing p2 to p2.
@@ -29,7 +29,7 @@
 #' \item{p1}{the proportion in group 1}
 #' \item{p2}{the proportion in group 2}
 #' \item{power}{calculated or desired power}
-#' \item{sig.level}{level of signficance}
+#' \item{sig.level}{level of significance}
 #'
 #' @importFrom Hmisc bsamsize bpower
 #' @importFrom stats power.prop.test

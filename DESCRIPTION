@@ -1,7 +1,7 @@
 Package: catfun
 Type: Package
 Title: Functions for P8120
-Version: 0.1.2.9000
+Version: 0.1.2
 Author: Nick Williams
 Maintainer: Nick Williams <ntwilliams.personal@gmail.com>
 Description: Wrapper functions for the analysis of categorical data. 

@@ -20,7 +20,7 @@
 \item{method}{a character string indicating method for calculating confidence interval, default is "wald". Options include,
 wald, wilson, agresti-couli, jeffreys, modified wilson, wilsoncc modified jeffreys, clopper-pearson, arcsine, logit, witting, and pratt.}
 
-\item{alternative}{character string specifiying the alternative hypothesis. Possible options are "two.sided" (default),
+\item{alternative}{character string specifying the alternative hypothesis. Possible options are "two.sided" (default),
 "greater", or "less".}
 
 \item{conf.level}{confidence level for confidence interval, default is 0.95.}
