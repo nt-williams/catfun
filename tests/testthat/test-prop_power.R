@@ -1,4 +1,3 @@
-
 context("prop_power is working")
 library(catfun)
 
