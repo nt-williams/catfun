@@ -5,17 +5,17 @@
 [![Build
 Status](https://travis-ci.org/nt-williams/catfun.svg?branch=master)](https://travis-ci.org/nt-williams/catfun)
 
-catfun simplifies existing functions for categorical data analysis.
+*catfun* simplifies existing functions for categorical data analysis.
 
 ## Installation
 
-catfun can be installed from CRAN using:
+*catfun* can be installed from CRAN using:
 
 ``` r
 install.packages("catfun")
 ```
 
-The development version can be installed from github using:
+The development version can be installed from Github using:
 
 ``` r
 devtools::install_github("nt-williams/catfun")

@@ -11,17 +11,17 @@ knitr::opts_chunk$set(echo = TRUE)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/catfun)](https://cran.r-project.org/package=catfun)
 [![Build Status](https://travis-ci.org/nt-williams/catfun.svg?branch=master)](https://travis-ci.org/nt-williams/catfun)
 
-catfun simplifies existing functions for categorical data analysis.
+*catfun* simplifies existing functions for categorical data analysis.
 
 ## Installation
 
-catfun can be installed from CRAN using:
+*catfun* can be installed from CRAN using:
 
 ```{r eval = FALSE}
 install.packages("catfun")
 ```
 
-The development version can be installed from github using: 
+The development version can be installed from Github using: 
 
 ```{r eval = FALSE}
 devtools::install_github("nt-williams/catfun")
