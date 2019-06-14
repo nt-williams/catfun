@@ -9,6 +9,14 @@ catfun simplifies existing functions for categorical data analysis.
 
 ## Installation
 
+catfun can be installed from CRAN using:
+
+``` r
+install.packages("catfun")
+```
+
+The version can be installed from github using:
+
 ``` r
 devtools::install_github("nt-williams/catfun")
 ```
