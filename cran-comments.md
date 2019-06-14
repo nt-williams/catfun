@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission, in this version I have (6/13 resubmission): 
+This is a resubmission, in this version I have: 
 
 * Removed removed "Function for" from the title. 
 
