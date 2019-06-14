@@ -1,6 +1,6 @@
 Package: catfun
 Type: Package
-Title: Functions for Categorical Data Analysis
+Title: Categorical Data Analysis
 Version: 0.1.3
 Author: Nick Williams
 Maintainer: Nick Williams <ntwilliams.personal@gmail.com>
