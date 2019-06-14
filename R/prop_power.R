@@ -31,9 +31,13 @@
 #' \item{power}{calculated or desired power}
 #' \item{sig.level}{level of significance}
 #'
+#' @details Power calculations are done using the methods described in `stats::power.prop.test`,
+#'    `Hmisc::bsamsize`, and `Hmisc::bpower`.
+#'
 #' @importFrom Hmisc bsamsize bpower
 #' @importFrom stats power.prop.test
 #' @export
+#' @seealso [stats::power.prop.test], [Hmisc::bsamsize], [Hmisc:bpower]
 prop_power <- function(n, n1, n2, p1, p2, fraction = 0.5, alpha = 0.05, power = NULL,
                        alternative = c("two.sided", "one.sided"),
                        odds.ratio, percent.reduction, ...) {

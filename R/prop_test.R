@@ -34,8 +34,11 @@
 #' \item{exact_ci}{exact confidence interval}
 #' \item{exact_p}{p-value from exact test}
 #'
+#' @details Calculations are done using the methods described in `stats::binom.test()` and `stats::prop.test()`
+#'
 #' @importFrom stats binom.test pnorm prop.test qnorm xtabs
 #' @export
+#' @seealso [stats::binom.test()], [stats::prop.test()]
 prop_test <- function(x, ...) UseMethod("prop_test")
 
 #' @export

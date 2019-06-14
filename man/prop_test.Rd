@@ -28,6 +28,9 @@ a list with class "prop_test" containing the following components:
 \description{
 Conduct 1-sample tests of proportions and tests for equality of k proportions.
 }
+\details{
+Calculations are done using the methods described in `stats::binom.test()` and `stats::prop.test()`
+}
 \examples{
 prop_test(7, 50, method = "wald", p = 0.2)
 prop_test(7, 50, method = "wald", p = 0.2, exact = TRUE)
@@ -44,4 +47,7 @@ prop_test(sleep)
 
 prop_test(vietnam, service, sleep, count)
 
+}
+\seealso{
+[stats::binom.test()], [stats::prop.test()]
 }

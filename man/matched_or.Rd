@@ -21,8 +21,12 @@ a list with class "matched_or" with the following components:
 \description{
 Create odds ratio and confidence interval from matched pairs data.
 }
+\details{
+The matched pairs odds ratio and confidence interval is the equivalent of
+   calculating a Cochran-Mantel-Haenszel odds ratio where each pair is treated as a stratum.
+}
 \examples{
-
+set.seed(1)
 gene <- data.frame(pair = seq(1:35),
                    ulcer = rbinom(35, 1, .7),
                    healthy = rbinom(35, 1, .4))

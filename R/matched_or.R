@@ -10,10 +10,13 @@
 #' \item{tab}{2x2 table using for calculating risk difference}
 #' \item{or}{dataframe with columns corresponding to matched-pairs OR, lower bound, and upper bound of CI}
 #' \item{conf.level}{specified confidence level}
+#'
+#' @details The matched pairs odds ratio and confidence interval is the equivalent of
+#'    calculating a Cochran-Mantel-Haenszel odds ratio where each pair is treated as a stratum.
 #' @export
 #'
 #' @examples
-#'
+#' set.seed(1)
 #' gene <- data.frame(pair = seq(1:35),
 #'                    ulcer = rbinom(35, 1, .7),
 #'                    healthy = rbinom(35, 1, .4))

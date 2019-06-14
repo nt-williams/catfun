@@ -47,10 +47,17 @@ a list with class "prop_power" containing the following components:
 \description{
 Calculate power and sample size for comparison of 2 proportions for both balanced and unbalanced designs.
 }
+\details{
+Power calculations are done using the methods described in `stats::power.prop.test`,
+   `Hmisc::bsamsize`, and `Hmisc::bpower`.
+}
 \examples{
 prop_power(n = 220, p1 = 0.35, p2 = 0.2)
 prop_power(p1 = 0.35, p2 = 0.2, fraction = 2/3, power = 0.85)
 prop_power(p1 = 0.35, n = 220, percent.reduction = 42.857)
 prop_power(p1 = 0.35, n = 220, odds.ratio = 0.4642857)
 
+}
+\seealso{
+[stats::power.prop.test], [Hmisc::bsamsize], [Hmisc:bpower]
 }
