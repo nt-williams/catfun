@@ -21,7 +21,7 @@ catfun can be installed from CRAN using:
 install.packages("catfun")
 ```
 
-The version can be installed from github using: 
+The development version can be installed from github using: 
 
 ```{r eval = FALSE}
 devtools::install_github("nt-williams/catfun")
