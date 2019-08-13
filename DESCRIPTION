@@ -1,7 +1,7 @@
 Package: catfun
 Type: Package
 Title: Categorical Data Analysis
-Version: 0.1.4
+Version: 0.1.4.9000
 Author: Nick Williams [aut, cre], 
     Christine Mauro [aut]
 Maintainer: Nick Williams <ntwilliams.personal@gmail.com>
