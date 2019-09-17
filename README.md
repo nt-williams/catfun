@@ -4,6 +4,7 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/catfun)](https://cran.r-project.org/package=catfun)
 [![Build
 Status](https://travis-ci.org/nt-williams/catfun.svg?branch=master)](https://travis-ci.org/nt-williams/catfun)
+![](http://cranlogs.r-pkg.org/badges/grand-total/catfun)
 
 *catfun* simplifies existing functions for categorical data analysis.
 
